@@ -4,8 +4,24 @@ UIKonf Call for Proposal application.
 
 ## Development
 
+Bootstrap dependencies:
+
 ```
 bin/setup
+```
+
+Run application locally:
+
+```
+bin/rails server
+```
+
+## Monitoring
+
+Check logs:
+
+```
+heroku logs -t
 ```
 
 ## Application configuration
