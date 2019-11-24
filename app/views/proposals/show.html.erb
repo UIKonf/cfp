@@ -8,5 +8,11 @@
   <%= @proposal.description %>
 </p>
 
+<h2>Comments</h2>
+<%= render @proposal.comments %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
+
 <%= link_to 'Edit', edit_proposal_path(@proposal) %>
 <%= link_to 'Back', proposals_path %>
