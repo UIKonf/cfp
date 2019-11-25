@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  root 'welcome#index'
+
+  get '/login', to: 'users#new'
 
   resources :proposals do
     resources :comments
   end
 
-  root 'welcome#index'
 end
