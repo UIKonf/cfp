@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  github_uid: MyString
-  github_nickname: MyString
+  name: jane
+  email: jane@example.com
+  github_uid: github_uid_jane
+  github_nickname: github_nickname_jane
 
 two:
-  name: MyString
-  email: MyString
-  github_uid: MyString
-  github_nickname: MyString
+  name: john
+  email: john@example.com
+  github_uid: github_uid_john
+  github_nickname: github_nickname_john
