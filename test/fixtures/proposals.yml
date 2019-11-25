@@ -3,11 +3,9 @@
 one:
   title: MyString
   description: MyString
-  confirmed: 
-  withdrawn: 
+  live:
 
 two:
   title: MyString
   description: MyString
-  confirmed: 
-  withdrawn: 
+  live:
