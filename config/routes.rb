@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   get 'github_authentication/logout'
   root 'welcome#index'
 
-  get '/login', to: 'users#new'
-
   resources :users
 
+  # Authentication and session management
+  get '/login', to: 'github_authentication#new'
   get '/auth/github/callback', to: 'github_authentication#callback'
-  get '/logout', to: 'github_authentication#logout'
+  delete '/logout', to: 'github_authentication#logout'
 
   resources :proposals do
     resources :comments

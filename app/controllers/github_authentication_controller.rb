@@ -5,7 +5,7 @@ class GithubAuthenticationController < ApplicationController
 
     if @user
       session[:user_id] = @user.id
-      flash[:success] = 'Signed in successfully'
+      flash[:success] = 'Logged in successfully'
       redirect_to user_url(@user)
     else
       redirect_to login_url
@@ -14,7 +14,7 @@ class GithubAuthenticationController < ApplicationController
 
   def logout
     session[:user_id] = nil
-    flash[:success] = 'Signed out'
+    flash[:success] = 'Logged out'
     redirect_to root_url
   end
 end
