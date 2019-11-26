@@ -5,6 +5,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name: 'Vincent',
+                     public_name: 'e941768a902679',
                      email: 'vincent.garrigues@gmail.com',
                      github_uid: 'gh_uid',
                      github_nickname: 'garriguv')
@@ -16,6 +17,11 @@ class UserTest < ActiveSupport::TestCase
 
   test 'name should be present' do
     @user.name = '        '
+    assert_not @user.valid?
+  end
+
+  test 'public_name should be present' do
+    @user.public_name = '        '
     assert_not @user.valid?
   end
 
@@ -32,6 +38,12 @@ class UserTest < ActiveSupport::TestCase
   test 'github_nickname should be present' do
     @user.github_nickname = '        '
     assert_not @user.valid?
+  end
+
+  test 'public_name should be unique' do
+    duplicate = @user.dup
+    @user.save
+    assert_not duplicate.valid?
   end
 
   test 'email should be unique' do

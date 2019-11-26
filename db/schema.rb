@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_234107) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
+    t.string "public_name"
     t.string "email"
     t.string "github_uid"
     t.string "github_nickname"

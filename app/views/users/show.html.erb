@@ -1,6 +1,25 @@
 <% provide(:title, @user.name) %>
-<h1>
-  <%= gravatar_for @user, size: 50 %>
-  <%= robohash_for @user, size: 50 %>
-  <%= @user.name %> <small><%= @user.email %></small>
-</h1>
+
+<div class="card border-success mb-3">
+  <div class="card-header">
+    Public profile
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= @user.public_name %>
+    </h5>
+    <%= robohash_for @user, size: 50 %>
+  </div>
+</div>
+
+<div class="card border-danger mb-3">
+  <div class="card-header">
+    Internal profile (only you can see this)
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= name_email_for @user %>
+    </h5>
+    <%= gravatar_for @user, size: 50 %>
+  </div>
+</div>

@@ -2,12 +2,14 @@
 
 one:
   name: jane
+  public_name: 2cbd211d60d43d
   email: jane@example.com
   github_uid: github_uid_jane
   github_nickname: github_nickname_jane
 
 two:
   name: john
+  public_name: 4a7f8a1f57d98a
   email: john@example.com
   github_uid: github_uid_john
   github_nickname: github_nickname_john

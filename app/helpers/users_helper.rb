@@ -12,4 +12,8 @@ module UsersHelper
     robohash_url = "https://robohash.org/#{robohash_id}?size=#{options[:size]}x#{options[:size]}"
     image_tag(robohash_url, alt: 'UIKonf Friendly Commenter', class: 'robohash')
   end
+
+  def name_email_for(user)
+    "#{user.name} <#{user.email}>"
+  end
 end
