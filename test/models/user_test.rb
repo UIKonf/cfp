@@ -53,4 +53,17 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     assert_equal 'vincent@example.com', @user.reload.email
   end
+
+  test 'create_with_omniauth' do
+    auth_hash = {
+        uid: 'the_uid',
+        info: {
+            name: 'User Name',
+            email: 'email@example.com',
+            nickname: '@nickname'
+        }
+    }
+    auth_user = User.create_with_omniauth(auth_hash)
+    assert auth_user.valid?
+  end
 end

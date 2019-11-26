@@ -1,3 +1,5 @@
 <% provide(:title, 'Log In') %>
-<h1>Log in</h1>
-<p>Log in with GitHub:</p>
+
+<p>
+  <%= link_to 'Sign in via GitHub', '/auth/github', method: :post %>
+</p>
