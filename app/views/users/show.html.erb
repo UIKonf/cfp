@@ -1,0 +1,6 @@
+<% provide(:title, @user.name) %>
+<h1>
+  <%= gravatar_for @user, size: 50 %>
+  <%= robohash_for @user, size: 50 %>
+  <%= @user.name %> <small><%= @user.email %></small>
+</h1>

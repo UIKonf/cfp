@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get '/login', to: 'users#new'
 
+  resources :users
+
   resources :proposals do
     resources :comments
   end
