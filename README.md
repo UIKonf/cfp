@@ -28,31 +28,12 @@ heroku logs -t
 
 ### GitHub authentication
 
-Create a new [GitHub OAuth application](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/).
+We use [GitHub OAuth application](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/) to log
+users in.
 
-### SendGrid emails
+You'll have to set the following environment variables:
+* `GITHUB_KEY`
+* `GITHUB_SECRET`
 
+They're used to configure omniauth in [omniauth.rb](https://github.com/UIKonf/cfp/blob/master/config/initializers/omniauth.rb#L3).
 
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
