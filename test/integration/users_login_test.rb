@@ -52,4 +52,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_template 'github_authentication/new'
     assert_not flash.empty?
   end
+
+  test 'friendly forwarding' do
+    get proposals_path
+    log_in_as(@user)
+    assert_redirected_to proposals_path
+  end
 end

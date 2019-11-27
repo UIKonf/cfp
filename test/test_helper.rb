@@ -27,8 +27,6 @@ class ActionDispatch::IntegrationTest
     post '/auth/github'
     follow_redirect!
     assert is_logged_in?
-    assert_redirected_to @user
-    follow_redirect!
   end
 
   def assert_authenticated_only
