@@ -18,3 +18,15 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 end
+
+class ActionDispatch::IntegrationTest
+  def log_in_as(user)
+    OmniAuth.config.test_mode = true
+    OmniAuth.config.add_mock(:github, uid: user.github_uid)
+    post '/auth/github'
+    follow_redirect!
+    assert is_logged_in?
+    assert_redirected_to @user
+    follow_redirect!
+  end
+end
