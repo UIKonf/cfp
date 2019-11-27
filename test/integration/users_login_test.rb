@@ -57,5 +57,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     get proposals_path
     log_in_as(@user)
     assert_redirected_to proposals_path
+    assert_nil session[:forwarding_url]
   end
 end
