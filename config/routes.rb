@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'github_authentication/logout'
   root 'welcome#index'
 
-  resources :users
+  resources :users, only: [:show]
 
   # Authentication and session management
   get '/login', to: 'github_authentication#new'
