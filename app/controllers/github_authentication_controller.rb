@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GithubAuthenticationController < ApplicationController
   def callback
     auth_hash = request.env['omniauth.auth']
@@ -11,6 +13,11 @@ class GithubAuthenticationController < ApplicationController
       flash[:danger] = 'Ooops, something went wrong logging you in :/'
       redirect_to login_url
     end
+  end
+
+  def failure
+    flash[:danger] = "Oops, something went wrong on GitHub's side: #{params[:message]}"
+    redirect_to login_url
   end
 
   def logout
