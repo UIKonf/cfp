@@ -17,6 +17,7 @@ class ActiveSupport::TestCase
   def log_in_as(user)
     session[:user_id] = user.id
   end
+
 end
 
 class ActionDispatch::IntegrationTest
@@ -28,5 +29,9 @@ class ActionDispatch::IntegrationTest
     assert is_logged_in?
     assert_redirected_to @user
     follow_redirect!
+  end
+
+  def assert_authenticated_only
+    assert_redirected_to login_url
   end
 end
