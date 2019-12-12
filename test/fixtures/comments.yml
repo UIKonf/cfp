@@ -3,7 +3,9 @@
 one:
   body: MyText
   proposal: one
+  user: one
 
 two:
   body: MyText
   proposal: two
+  user: two

@@ -13,6 +13,9 @@ class User < ApplicationRecord
   validates :github_uid, presence: true, uniqueness: true
   validates :github_nickname, presence: true
 
+  has_many :proposals, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
   def self.create_with_omniauth(auth_hash)
     create! do |user|
       user.name = auth_hash[:info][:name]
