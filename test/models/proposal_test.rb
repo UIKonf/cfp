@@ -34,4 +34,18 @@ class ProposalTest < ActiveSupport::TestCase
     @proposal.description = 'a' * 199
     assert_not @proposal.valid?
   end
+
+  test 'new proposals are not live' do
+    assert_not @proposal.live
+  end
+
+  test 'proposals can be published' do
+    @proposal.publish!
+    assert @proposal.live
+  end
+
+  test 'proposals can be withdrawn' do
+    @proposal.withdraw!
+    assert_not @proposal.live
+  end
 end

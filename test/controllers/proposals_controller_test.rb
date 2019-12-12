@@ -5,6 +5,7 @@ require 'test_helper'
 class ProposalsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:one)
+    @proposal = proposals(:one)
   end
 
   test 'only accessible when logged in' do
@@ -36,5 +37,27 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: false)
     get new_proposal_url
     assert_response :success
+  end
+
+  test 'should post publish' do
+    log_in_as(@user)
+    post publish_proposal_path(@proposal)
+    assert_redirected_to @proposal
+  end
+
+  test 'should post withdraw' do
+    log_in_as(@user)
+    post withdraw_proposal_path(@proposal)
+    assert_redirected_to @proposal
+  end
+
+  test 'only one proposal can be published' do
+    log_in_as(@user)
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: true)
+    proposal = @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: false)
+    post publish_proposal_path(proposal)
+
+    assert_redirected_to proposals_path
+    assert_not proposal.live
   end
 end

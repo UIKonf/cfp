@@ -2,10 +2,10 @@
 
 class ProposalsController < ApplicationController
   before_action :authenticate_user!
-  before_action :allow_one_active_proposal, only: %i[new create]
+  before_action :allow_one_active_proposal, only: %i[new create publish]
 
   def index
-    @proposals = Proposal.all
+    @proposals = Proposal.all.where(live: true)
   end
 
   def show
@@ -44,6 +44,22 @@ class ProposalsController < ApplicationController
     @proposal.destroy
 
     redirect_to proposals_path
+  end
+
+  def publish
+    @proposal = current_user.proposals.find(params[:id])
+    @proposal.publish!
+    flash[:success] = "Your proposal has been published!"
+
+    redirect_to @proposal
+  end
+
+  def withdraw
+    @proposal = current_user.proposals.find(params[:id])
+    @proposal.withdraw!
+    flash[:warning] = "Your proposal has been withdrawn!"
+
+    redirect_to @proposal
   end
 
   private

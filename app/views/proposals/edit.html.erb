@@ -1,7 +1,13 @@
-<%  provide(:title, "#{@proposal.title}") %>
+<% provide(:title, "#{@proposal.title}") %>
 
 <h1>Edit proposal</h1>
 
 <%= render 'form' %>
+
+<% if @proposal.live %>
+  <%= link_to 'Withdraw proposal', withdraw_proposal_url(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+<% else %>
+  <%= link_to 'Publish proposal', publish_proposal_url(@proposal), method: :post, class: 'btn btn-success', data: {confirm: 'Are you sure?'} %>
+<% end %>
 
 <%= link_to 'Back', proposals_path %>

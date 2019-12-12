@@ -1,5 +1,20 @@
 <% provide(:title, @user.name) %>
 
+<h1>Proposals</h1>
+
+<ul class="list-group">
+  <% @user.proposals.each do |proposal| %>
+    <a href="<%= edit_proposal_path(proposal) %>" class="list-group-item list-group-item-action">
+      <%= proposal.title %>
+      <% if proposal.live %>
+        <span class="badge badge-success">Live</span>
+      <% end %>
+    </a>
+  <% end %>
+</ul>
+
+<h1>Profile</h1>
+
 <div class="card border-success mb-3">
   <div class="card-header">
     Public profile

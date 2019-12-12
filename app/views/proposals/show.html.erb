@@ -1,4 +1,4 @@
-<%  provide(:title, "#{@proposal.title}") %>
+<% provide(:title, "#{@proposal.title}") %>
 
 <p>
   <strong>Title:</strong>
@@ -10,11 +10,13 @@
   <%= @proposal.description %>
 </p>
 
-<h2>Comments</h2>
-<%= render @proposal.comments %>
+<% if @proposal.live %>
+  <h2>Comments</h2>
+  <%= render @proposal.comments %>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+<% end %>
 
 <%= link_to 'Edit', edit_proposal_path(@proposal) %>
 <%= link_to 'Back', proposals_path %>
