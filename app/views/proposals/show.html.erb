@@ -1,9 +1,29 @@
 <% provide(:title, "#{@proposal.title}") %>
 
+<% if @proposal.user == current_user %>
+  <div class="alert alert-secondary">
+    <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
+    <% if @proposal.live %>
+      <%= link_to 'Withdraw', withdraw_proposal_path(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+    <% else %>
+      <%= link_to 'Publish', publish_proposal_path(@proposal), method: :post, class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
+    <% end %>
+  </div>
+<% end %>
+
+<% unless @proposal.live %>
+  <div class="alert alert-warning" role="alert">
+    This proposal is not published.
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-sm-9">
     <h1>
       <%= @proposal.title %>
+
+      <% if @proposal.user == current_user %>
+      <% end %>
     </h1>
 
     <%= markdown(@proposal.description) %>
@@ -18,6 +38,3 @@
     <% end %>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_proposal_path(@proposal) %>
-<%= link_to 'Back', proposals_path %>
