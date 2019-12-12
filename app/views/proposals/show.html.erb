@@ -1,22 +1,23 @@
 <% provide(:title, "#{@proposal.title}") %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @proposal.title %>
-</p>
+<div class="row">
+  <div class="col-sm-9">
+    <h1>
+      <%= @proposal.title %>
+    </h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @proposal.description %>
-</p>
+    <%= markdown(@proposal.description) %>
+  </div>
+  <div class="col-sm-3">
+    <% if @proposal.live %>
+      <h2>Comments</h2>
+      <%= render @proposal.comments %>
 
-<% if @proposal.live %>
-  <h2>Comments</h2>
-  <%= render @proposal.comments %>
-
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
-<% end %>
+      <h2>Add a comment:</h2>
+      <%= render 'comments/form' %>
+    <% end %>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_proposal_path(@proposal) %>
 <%= link_to 'Back', proposals_path %>
