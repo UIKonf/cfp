@@ -2,5 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :proposal
 
-  validates :body, presence: true, length: { minimum: 20 }
+  validates :user_id, presence: true
+  validates :proposal_id, presence: true
+  validates :body, presence: true, length: { minimum: 50 }
 end

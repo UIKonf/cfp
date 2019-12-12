@@ -13,3 +13,10 @@ two:
   email: john@example.com
   github_uid: github_uid_john
   github_nickname: github_nickname_john
+
+sabine:
+  name: sabine
+  public_name: f6fd3d5
+  email: sabine@example.com
+  github_uid: github_uid_sabine
+  github_nickname: github_nickname_sabine
