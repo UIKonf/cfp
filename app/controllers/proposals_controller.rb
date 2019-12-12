@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class ProposalsController < ApplicationController
   before_action :authenticate_user!
+  before_action :allow_one_active_proposal, only: %i[new create]
 
   def index
     @proposals = Proposal.all
@@ -18,7 +21,7 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    @proposal = Proposal.new(proposal_params)
+    @proposal = current_user.proposals.create(proposal_params)
     if @proposal.save
       redirect_to @proposal
     else
@@ -47,5 +50,12 @@ class ProposalsController < ApplicationController
 
   def proposal_params
     params.require(:proposal).permit(:title, :description)
+  end
+
+  def allow_one_active_proposal
+    if current_user.proposals.where(live: true).count > 0
+      flash[:warning] = "You already proposed a talk. Please withdraw it first if you'd like to propose another one."
+      redirect_to proposals_url
+    end
   end
 end
