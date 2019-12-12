@@ -78,4 +78,25 @@ class UserTest < ActiveSupport::TestCase
     auth_user = User.create_with_omniauth(auth_hash)
     assert auth_user.valid?
   end
+
+  test 'destroys proposal' do
+    @user.save
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250)
+
+    assert_difference 'Proposal.count', -1 do
+      @user.destroy
+    end
+  end
+
+  test 'destroys comments' do
+
+    @user.save
+    @proposal = proposals(:one)
+    @proposal.comments.create!(body: 'b' * 60, user_id: @user.id)
+    @proposal.comments.create!(body: 'c' * 60, user_id: @user.id)
+
+    assert_difference 'Comment.count', -2 do
+      @user.destroy
+    end
+  end
 end
