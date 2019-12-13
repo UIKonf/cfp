@@ -1,19 +1,23 @@
 <% provide(:title, @user.name) %>
 
-<h1>Proposals</h1>
+<h1>Your proposals</h1>
 
 <ul class="list-group">
-  <% @user.proposals.each do |proposal| %>
-    <a href="<%= edit_proposal_path(proposal) %>" class="list-group-item list-group-item-action">
-      <%= proposal.title %>
-      <% if proposal.live %>
-        <span class="badge badge-success">Live</span>
-      <% end %>
-    </a>
+  <% if @user.proposals.empty? %>
+    <%= link_to new_proposal_path, class: "btn btn-create" %>
+  <% else %>
+    <% @user.proposals.each do |proposal| %>
+      <a href="<%= proposal_path(proposal) %>" class="list-group-item list-group-item-action">
+        <%= proposal.title %>
+        <% if proposal.live %>
+          <span class="badge badge-success">Live</span>
+        <% end %>
+      </a>
+    <% end %>
   <% end %>
 </ul>
 
-<h1>Profile</h1>
+<h1>Your profiles</h1>
 
 <div class="card border-success mb-3">
   <div class="card-header">
