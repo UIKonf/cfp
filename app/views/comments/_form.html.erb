@@ -1,9 +1,11 @@
-<%= form_with(model: [@proposal, @proposal.comments.build], local: true) do |form| %>
-  <p>
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<div class="form">
+  <%= form_with(model: [@proposal, @proposal.comments.build], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.text_area :body, class: 'form-control' %>
+      <small class="form-text text-muted">50 characters minimum</small>
+    </div>
+    <p>
+      <%= form.submit class: 'btn btn-primary' %>
+    </p>
+  <% end %>
+</div>

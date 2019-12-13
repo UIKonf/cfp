@@ -1,8 +1,7 @@
+<%= robohash_for comment.user, size: 40 %>
+<strong>
+  <%= comment.user.public_name %>
+</strong>
 <p>
-  <strong>Comment:</strong>
   <%= comment.body %>
-</p>
-
-<p>
-  <%= link_to 'Destroy Comment', [comment.proposal, comment], method: :delete, data: {confirm: 'Are you sure?'} %>
 </p>
