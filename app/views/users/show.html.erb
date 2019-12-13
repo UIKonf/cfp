@@ -2,10 +2,10 @@
 
 <h1>Your proposals</h1>
 
-<ul class="list-group">
-  <% if @user.proposals.empty? %>
-    <%= link_to new_proposal_path, class: "btn btn-create" %>
-  <% else %>
+<% if @user.proposals.empty? %>
+  <%= link_to 'New proposal', new_proposal_path, class: "btn btn-primary" %>
+<% else %>
+  <ul class="list-group">
     <% @user.proposals.each do |proposal| %>
       <a href="<%= proposal_path(proposal) %>" class="list-group-item list-group-item-action">
         <%= proposal.title %>
@@ -14,7 +14,7 @@
         <% end %>
       </a>
     <% end %>
-  <% end %>
+<% end %>
 </ul>
 
 <h1>Your profiles</h1>
