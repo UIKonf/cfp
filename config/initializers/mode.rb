@@ -1,6 +1,6 @@
 module Cfp
   def self.mode
-    @mode ||= Mode.new(ENV['CFP_MODE'])
+    @mode ||= Mode.new(ENV['CFP_MODE'].to_sym)
   end
 
   def self.mode=(new_mode)
