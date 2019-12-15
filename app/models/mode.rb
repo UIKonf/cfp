@@ -21,23 +21,28 @@ class Mode
 
   RULES = {
     inactive: [],
-    cfp: mode_for(user: %i[log_in show],
-                  proposal: %i[index show new create update edit publish withdraw destroy],
-                  comment: %i[index create destroy]),
-    review: mode_for(user: %i[log_in show],
-                     proposal: %i[index show update edit withdraw destroy],
-                     comment: %i[index create destroy]),
-    hold: mode_for(user: %i[log_in show],
-                   proposal: %i[index show withdraw destroy],
-                   comment: %i[destroy]),
-    selection: mode_for(user: %i[log_in show],
-                        proposal: %i[index show withdraw destroy],
-                        comment: %i[destroy],
-                        selection: %i[index create destroy]),
-    archive: mode_for(user: %i[log_in show],
-                      proposal: %i[index show withdraw destroy],
-                      comment: %i[destroy],
-                      selection: %i[index])
+    cfp:
+      mode_for(user: %i[log_in show],
+               proposal: %i[index show new create update edit publish withdraw destroy],
+               comment: %i[index create destroy]),
+    review:
+      mode_for(user: %i[log_in show],
+               proposal: %i[index show update edit withdraw destroy],
+               comment: %i[index create destroy]),
+    hold:
+      mode_for(user: %i[log_in show],
+               proposal: %i[index show withdraw destroy],
+               comment: %i[destroy]),
+    selection:
+      mode_for(user: %i[log_in show],
+               proposal: %i[index show withdraw destroy],
+               comment: %i[destroy],
+               selection: %i[index create destroy]),
+    archive:
+      mode_for(user: %i[log_in show],
+               proposal: %i[index show withdraw destroy],
+               comment: %i[destroy],
+               selection: %i[index])
   }.freeze
 
 end
