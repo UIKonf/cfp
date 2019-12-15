@@ -27,7 +27,7 @@ class Mode
       %i[withdraw proposal],
       %i[destroy proposal],
       %i[create comment],
-      %i[hide comment]
+      %i[destroy comment]
     ],
     review: [
       %i[log_in user],
@@ -37,7 +37,7 @@ class Mode
       %i[withdraw proposal],
       %i[destroy proposal],
       %i[create comment],
-      %i[hide comment]
+      %i[destroy comment]
     ],
     hold: [
       %i[log_in user],

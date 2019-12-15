@@ -4,5 +4,11 @@ class Comment < ApplicationRecord
 
   validates :user_id, presence: true
   validates :proposal_id, presence: true
-  validates :body, presence: true, length: { minimum: 50 }
+  validates :body, presence: true, length: {minimum: 50}
+
+  default_scope { where('hidden = ?', false) }
+
+  def hide!
+    update(hidden: true)
+  end
 end

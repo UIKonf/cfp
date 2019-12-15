@@ -25,4 +25,13 @@ class CommentTest < ActiveSupport::TestCase
     @comment.body = 'b' * 49
     assert_not @comment.valid?
   end
+
+  test 'default scope removes hidden comments' do
+    assert proposals(:two).comments.count == 1
+  end
+
+  test 'can hide! comments' do
+    @comment.hide!
+    assert @comment.hidden
+  end
 end

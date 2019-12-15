@@ -1,7 +1,16 @@
 <% if comment.user == author %>
-  <strong>
-    <span class="badge badge-info my-2">Author</span>
-  </strong>
+  <div class="d-flex">
+    <div>
+      <strong>
+        <span class="badge badge-info my-2">Author</span>
+      </strong>
+    </div>
+    <div class="ml-auto">
+      <small>
+        <%= link_to 'Delete', proposal_comment_path(comment), method: :delete, class: 'mx-2', data: {confirm: 'Are you sure you want to delete your comment?'} %>
+      </small>
+    </div>
+  </div>
 <% else %>
   <%= robohash_for comment.user, size: 40 %>
   <strong>

@@ -20,3 +20,10 @@ sabine:
   email: sabine@example.com
   github_uid: github_uid_sabine
   github_nickname: github_nickname_sabine
+
+bad_person:
+  name: not cool
+  public_name:
+  email: not_cool@example.com
+  github_uid: github_uid_not_cool
+  github_nickname: github_nickname_not_cool

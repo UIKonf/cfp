@@ -9,3 +9,9 @@ two:
   body: MyText
   proposal: two
   user: two
+
+hidden:
+  body: not respecting the CoC
+  proposal: two
+  user: bad_person
+  hidden: true

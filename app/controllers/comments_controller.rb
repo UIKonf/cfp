@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   def destroy
     @proposal = Proposal.find(params[:proposal_id])
     @comment = current_user.comments.find_by_id(params[:id])
-    @comment&.destroy
+    @comment&.hide!
     redirect_to proposal_path(@proposal)
   end
 
