@@ -31,7 +31,7 @@
   <div class="col-sm-4">
     <% if @proposal.live %>
       <h2>Comments</h2>
-      <%= render @proposal.comments %>
+      <%= render partial: 'comments/comment', collection: @proposal.comments, locals: { author: @proposal.user } %>
 
       <%= render 'comments/form' %>
     <% end %>

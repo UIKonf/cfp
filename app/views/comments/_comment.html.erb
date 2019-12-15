@@ -1,7 +1,13 @@
-<%= robohash_for comment.user, size: 40 %>
-<strong>
-  <%= comment.user.public_name %>
-</strong>
+<% if comment.user == author %>
+  <strong>
+    <span class="badge badge-info my-2">Author</span>
+  </strong>
+<% else %>
+  <%= robohash_for comment.user, size: 40 %>
+  <strong>
+    <%= comment.user.public_name %>
+  </strong>
+<% end %>
 <p>
   <%= comment.body %>
 </p>
