@@ -5,17 +5,32 @@
         <span class="badge badge-info my-2">Author</span>
       </strong>
     </div>
-    <div class="ml-auto">
-      <small>
-        <%= link_to 'Delete', proposal_comment_path(@proposal, comment), method: :delete, class: 'mx-2', data: {confirm: 'Are you sure you want to delete your comment?'} %>
-      </small>
-    </div>
+    <% if current_user?(author) %>
+      <div class="ml-auto">
+        <small>
+          <%= link_to 'Delete', proposal_comment_path(@proposal, comment), method: :delete, class: 'mx-2', data: {confirm: 'Are you sure you want to delete your comment?'} %>
+        </small>
+      </div>
+    <% end %>
   </div>
 <% else %>
-  <%= robohash_for comment.user, size: 40 %>
-  <strong>
-    <%= comment.user.public_name %>
-  </strong>
+  <div class="d-flex">
+    <div>
+      <%= robohash_for comment.user, size: 40 %>
+    </div>
+    <div>
+      <strong>
+        <%= comment.user.public_name %>
+      </strong>
+    </div>
+    <% if current_user?(comment.user) %>
+      <div class="ml-auto">
+        <small>
+          <%= link_to 'Delete', proposal_comment_path(@proposal, comment), method: :delete, class: 'mx-2', data: {confirm: 'Are you sure you want to delete your comment?'} %>
+        </small>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 <p>
   <%= comment.body %>
