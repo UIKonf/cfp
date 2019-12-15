@@ -15,67 +15,29 @@ class Mode
     RULES[mode].include?([action, object])
   end
 
+  def self.mode_for(hash)
+    hash.reduce([]) { |acc, (object, actions)| acc + actions.map { |action| [action, object] } }
+  end
+
   RULES = {
     inactive: [],
-    cfp: [
-      %i[log_in user],
-      %i[show user],
-      %i[index proposal],
-      %i[show proposal],
-      %i[new proposal],
-      %i[create proposal],
-      %i[update proposal],
-      %i[edit proposal],
-      %i[publish proposal],
-      %i[withdraw proposal],
-      %i[destroy proposal],
-      %i[index comment],
-      %i[create comment],
-      %i[destroy comment]
-    ],
-    review: [
-      %i[log_in user],
-      %i[show user],
-      %i[index proposal],
-      %i[show proposal],
-      %i[edit proposal],
-      %i[update proposal],
-      %i[withdraw proposal],
-      %i[destroy proposal],
-      %i[index comment],
-      %i[create comment],
-      %i[destroy comment]
-    ],
-    hold: [
-      %i[log_in user],
-      %i[show user],
-      %i[index proposal],
-      %i[show proposal],
-      %i[withdraw proposal],
-      %i[destroy proposal],
-      %i[destroy comment]
-    ],
-    selection: [
-      %i[log_in user],
-      %i[show user],
-      %i[index proposal],
-      %i[show proposal],
-      %i[withdraw proposal],
-      %i[destroy proposal],
-      %i[index selection],
-      %i[create selection],
-      %i[destroy selection],
-      %i[destroy comment]
-    ],
-    archive: [
-      %i[log_in user],
-      %i[show user],
-      %i[index proposal],
-      %i[show proposal],
-      %i[withdraw proposal],
-      %i[destroy proposal],
-      %i[index selection],
-      %i[destroy comment]
-    ]
+    cfp: mode_for(user: %i[log_in show],
+                  proposal: %i[index show new create update edit publish withdraw destroy],
+                  comment: %i[index create destroy]),
+    review: mode_for(user: %i[log_in show],
+                     proposal: %i[index show update edit withdraw destroy],
+                     comment: %i[index create destroy]),
+    hold: mode_for(user: %i[log_in show],
+                   proposal: %i[index show withdraw destroy],
+                   comment: %i[destroy]),
+    selection: mode_for(user: %i[log_in show],
+                        proposal: %i[index show withdraw destroy],
+                        comment: %i[destroy],
+                        selection: %i[index create destroy]),
+    archive: mode_for(user: %i[log_in show],
+                      proposal: %i[index show withdraw destroy],
+                      comment: %i[destroy],
+                      selection: %i[index])
   }.freeze
+
 end
