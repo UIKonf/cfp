@@ -19,52 +19,63 @@ class Mode
     inactive: [],
     cfp: [
       %i[log_in user],
-      %i[view user],
-      %i[view proposal],
+      %i[show user],
+      %i[index proposal],
+      %i[show proposal],
+      %i[new proposal],
       %i[create proposal],
       %i[update proposal],
+      %i[edit proposal],
       %i[publish proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
-      %i[view comment],
+      %i[index comment],
       %i[create comment],
       %i[destroy comment]
     ],
     review: [
       %i[log_in user],
-      %i[view user],
-      %i[view proposal],
+      %i[show user],
+      %i[index proposal],
+      %i[show proposal],
+      %i[edit proposal],
       %i[update proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
-      %i[view comment],
+      %i[index comment],
       %i[create comment],
       %i[destroy comment]
     ],
     hold: [
       %i[log_in user],
-      %i[view user],
-      %i[view proposal],
+      %i[show user],
+      %i[index proposal],
+      %i[show proposal],
       %i[withdraw proposal],
-      %i[destroy proposal]
+      %i[destroy proposal],
+      %i[destroy comment]
     ],
     selection: [
       %i[log_in user],
-      %i[view user],
-      %i[view proposal],
+      %i[show user],
+      %i[index proposal],
+      %i[show proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
-      %i[view selection],
+      %i[index selection],
       %i[create selection],
-      %i[destroy selection]
+      %i[destroy selection],
+      %i[destroy comment]
     ],
     archive: [
       %i[log_in user],
-      %i[view user],
-      %i[view proposal],
+      %i[show user],
+      %i[index proposal],
+      %i[show proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
-      %i[view selection]
+      %i[index selection],
+      %i[destroy comment]
     ]
   }.freeze
 end
