@@ -4,11 +4,19 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_mode
 
+  def index
+    @proposal = Proposal.find(params[:proposal_id])
+    redirect_to proposal_path(@proposal)
+  end
+
   def create
     @proposal = Proposal.find(params[:proposal_id])
     @comment = current_user.comments.create(comment_params.merge(proposal: @proposal))
-    flash[:danger] = 'Your comment could not be saved, maybe it is too short?' unless @comment.save
-    redirect_to proposal_path(@proposal)
+    if @comment.save
+      redirect_to proposal_path(@proposal)
+    else
+      render 'proposals/show'
+    end
   end
 
   def destroy

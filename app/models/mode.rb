@@ -26,6 +26,7 @@ class Mode
       %i[publish proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
+      %i[view comment],
       %i[create comment],
       %i[destroy comment]
     ],
@@ -36,6 +37,7 @@ class Mode
       %i[update proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
+      %i[view comment],
       %i[create comment],
       %i[destroy comment]
     ],

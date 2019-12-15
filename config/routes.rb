@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'github_authentication#logout'
 
   resources :proposals do
-    resources :comments, only: %i[create destroy]
+    resources :comments, only: %i[index create destroy]
 
     member do
       post :publish

@@ -20,11 +20,25 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to @proposal
   end
 
+  test 'render proposals/show when comment is invalid' do
+    log_in_as(@user)
+    assert_difference 'Comment.count', 0 do
+      post proposal_comments_path(@proposal), params: {comment: {body: 'b'}}
+    end
+    assert_template 'proposals/show'
+  end
+
   test 'should hide comments when calling destroy' do
     log_in_as(@user)
     assert_difference 'Comment.count', 0 do
       delete proposal_comment_path(@proposal, @comment)
     end
+    assert_redirected_to @proposal
+  end
+
+  test 'index redirects to proposal' do
+    log_in_as(@user)
+    get proposal_comments_path(@proposal)
     assert_redirected_to @proposal
   end
 end

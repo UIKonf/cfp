@@ -1,5 +1,15 @@
 <div class="form">
-  <%= form_with(model: [@proposal, @proposal.comments.build], local: true) do |form| %>
+  <%= form_with(model: [@proposal, @comment], local: true) do |form| %>
+    <% if @comment.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="form-group">
       <%= form.text_area :body, class: 'form-control' %>
       <small class="form-text text-muted">50 characters minimum</small>
