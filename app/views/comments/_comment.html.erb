@@ -1,5 +1,5 @@
 <% if comment.user == author %>
-  <div class="d-flex">
+  <div class="d-flex align-items-center">
     <div>
       <strong>
         <span class="badge badge-info my-2">Author</span>
@@ -14,11 +14,11 @@
     <% end %>
   </div>
 <% else %>
-  <div class="d-flex">
+  <div class="d-flex align-items-center">
     <div>
       <%= robohash_for comment.user, size: 40 %>
     </div>
-    <div>
+    <div class="px-2">
       <strong>
         <%= comment.user.public_name %>
       </strong>
