@@ -19,7 +19,7 @@ class Mode
     inactive: [],
     cfp: [
       %i[log_in user],
-      %i[show user],
+      %i[view user],
       %i[view proposal],
       %i[create proposal],
       %i[update proposal],
@@ -31,7 +31,7 @@ class Mode
     ],
     review: [
       %i[log_in user],
-      %i[show user],
+      %i[view user],
       %i[view proposal],
       %i[update proposal],
       %i[withdraw proposal],
@@ -41,14 +41,14 @@ class Mode
     ],
     holding: [
       %i[log_in user],
-      %i[show user],
+      %i[view user],
       %i[view proposal],
       %i[withdraw proposal],
       %i[destroy proposal]
     ],
     voting: [
       %i[log_in user],
-      %i[show user],
+      %i[view user],
       %i[view proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
@@ -58,7 +58,7 @@ class Mode
     ],
     archive: [
       %i[log_in user],
-      %i[show user],
+      %i[view user],
       %i[view proposal],
       %i[withdraw proposal],
       %i[destroy proposal],
