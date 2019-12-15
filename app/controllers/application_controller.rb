@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include GithubAuthenticationHelper
+  include ModesHelper
 
   def authenticate_user!
     unless logged_in?

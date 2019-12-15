@@ -18,6 +18,9 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 
+  def set_mode(mode)
+    Cfp.mode = mode
+  end
 end
 
 class ActionDispatch::IntegrationTest

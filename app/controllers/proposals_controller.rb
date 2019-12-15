@@ -2,6 +2,7 @@
 
 class ProposalsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_mode
   before_action :allow_one_active_proposal, only: %i[new create publish]
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
 
@@ -15,9 +16,6 @@ class ProposalsController < ApplicationController
 
   def new
     @proposal = Proposal.new
-  end
-
-  def edit
   end
 
   def create
@@ -45,36 +43,40 @@ class ProposalsController < ApplicationController
 
   def publish
     @proposal.publish!
-    flash[:success] = "Your proposal has been published!"
+    flash[:success] = 'Your proposal has been published!'
 
     redirect_to @proposal
   end
 
   def withdraw
     @proposal.withdraw!
-    flash[:warning] = "Your proposal has been withdrawn!"
+    flash[:success] = 'Your proposal has been withdrawn!'
 
     redirect_to @proposal
   end
 
   private
 
+  def check_mode
+    check_mode_for_object(:proposal)
+  end
+
   def proposal_params
     params.require(:proposal).permit(:title, :description)
   end
 
   def allow_one_active_proposal
-    if current_user.proposals.where(live: true).count > 0
-      flash[:warning] = "You already proposed a talk. Please withdraw it first if you'd like to propose another one."
-      redirect_to proposals_url
-    end
+    return unless current_user.proposals.where(live: true).count.positive?
+
+    flash[:warning] = "You already proposed a talk. Please withdraw it first if you'd like to propose another one."
+    redirect_to proposals_url
   end
 
   def load_proposal_for_editing
     @proposal = current_user.proposals.find_by_id(params[:id])
-    if @proposal.nil?
-      flash[:error] = "You cannot edit proposals that are owned by other users"
-      redirect_to proposals_url
-    end
+    return unless @proposal.nil?
+
+    flash[:error] = 'You cannot edit proposals that are owned by other users'
+    redirect_to proposals_url
   end
 end

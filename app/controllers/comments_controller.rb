@@ -2,6 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_mode
 
   def create
     @proposal = Proposal.find(params[:proposal_id])
@@ -18,6 +19,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def check_mode
+    check_mode_for_object(:comment)
+  end
 
   def comment_params
     params.require(:comment).permit(:body)

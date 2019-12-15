@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GithubAuthenticationController < ApplicationController
+  before_action :check_mode, only: %i[new callback failure]
+
   def callback
     auth_hash = request.env['omniauth.auth']
     @user = User.find_by_github_uid(auth_hash[:uid]) || User.create_with_omniauth(auth_hash)
@@ -24,5 +26,14 @@ class GithubAuthenticationController < ApplicationController
     log_out
     flash[:success] = 'Logged out'
     redirect_to root_url
+  end
+
+  private
+
+  def check_mode
+    unless can?(:log_in, :user)
+      flash[:danger] = "You cannot log in in #{Cfp.mode.mode} mode"
+      redirect_to root_url
+    end
   end
 end
