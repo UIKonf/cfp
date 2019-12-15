@@ -39,14 +39,14 @@ class Mode
       %i[create comment],
       %i[hide comment]
     ],
-    holding: [
+    hold: [
       %i[log_in user],
       %i[view user],
       %i[view proposal],
       %i[withdraw proposal],
       %i[destroy proposal]
     ],
-    voting: [
+    selection: [
       %i[log_in user],
       %i[view user],
       %i[view proposal],
