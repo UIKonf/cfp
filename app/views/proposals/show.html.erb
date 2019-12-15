@@ -1,39 +1,46 @@
 <% provide(:title, "#{@proposal.title}") %>
 
-<% if @proposal.user == current_user %>
-  <div class="alert alert-secondary">
-    <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
-    <% if @proposal.live %>
-      <%= link_to 'Withdraw', withdraw_proposal_path(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
-    <% else %>
-      <%= link_to 'Publish', publish_proposal_path(@proposal), method: :post, class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
-    <% end %>
+<% if @proposal.user.blocked %>
+  <div class="alert alert-danger">
+    This proposal has been removed by a moderator
   </div>
-<% end %>
-
-<% unless @proposal.live %>
-  <div class="alert alert-info" role="alert">
-    This proposal is not published.
-  </div>
-<% end %>
-
-<div class="row">
-  <div class="col-sm-8">
-    <h1>
-      <%= @proposal.title %>
-
-      <% if @proposal.user == current_user %>
+<% else %>
+  <% if @proposal.user == current_user %>
+    <div class="alert alert-secondary">
+      <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
+      <% if @proposal.live %>
+        <%= link_to 'Withdraw', withdraw_proposal_path(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+      <% else %>
+        <%= link_to 'Publish', publish_proposal_path(@proposal), method: :post, class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
       <% end %>
-    </h1>
+    </div>
+  <% end %>
 
-    <%= markdown(@proposal.description) %>
-  </div>
-  <div class="col-sm-4">
-    <% if @proposal.live %>
-      <h2>Comments</h2>
-      <%= render partial: 'comments/comment', collection: @proposal.comments, locals: { author: @proposal.user } %>
+  <% unless @proposal.live %>
+    <div class="alert alert-info" role="alert">
+      This proposal is not published.
+    </div>
+  <% end %>
 
-      <%= render 'comments/form' %>
-    <% end %>
+  <div class="row">
+    <div class="col-sm-8">
+      <h1>
+        <%= @proposal.title %>
+
+        <% if @proposal.user == current_user %>
+        <% end %>
+      </h1>
+
+      <%= markdown(@proposal.description) %>
+    </div>
+    <div class="col-sm-4">
+      <% if @proposal.live %>
+        <h2>Comments</h2>
+        <%= render partial: 'comments/comment', collection: @proposal.comments, locals: {author: @proposal.user} %>
+
+        <%= render 'comments/form' %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
+

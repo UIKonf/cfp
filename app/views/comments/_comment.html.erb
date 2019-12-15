@@ -1,8 +1,14 @@
-<% if comment.user == author %>
-  <div class="d-flex align-items-center">
+<% if comment.user.blocked %>
+  <div class="d-flex align-items-center my-2">
+    <small>
+      <em>This comment has been removed by a moderator</em>
+    </small>
+  </div>
+<% elsif comment.user == author %>
+  <div class="d-flex align-items-center my-2">
     <div>
       <strong>
-        <span class="badge badge-info my-2">Author</span>
+        <span class="badge badge-info">Author</span>
       </strong>
     </div>
     <% if current_user?(author) %>
@@ -13,8 +19,11 @@
       </div>
     <% end %>
   </div>
+  <p>
+    <%= comment.body %>
+  </p>
 <% else %>
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center my-2">
     <div>
       <%= robohash_for comment.user, size: 40 %>
     </div>
@@ -31,7 +40,7 @@
       </div>
     <% end %>
   </div>
+  <p>
+    <%= comment.body %>
+  </p>
 <% end %>
-<p>
-  <%= comment.body %>
-</p>

@@ -25,4 +25,12 @@ class User < ApplicationRecord
       user.github_nickname = auth_hash[:info][:nickname]
     end
   end
+
+  def block!(reason)
+    update(blocked: true, block_reason: reason)
+  end
+
+  def unblock!
+    update(blocked: false, block_reason: nil)
+  end
 end

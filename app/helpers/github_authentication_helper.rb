@@ -30,4 +30,14 @@ module GithubAuthenticationHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  def check_if_blocked
+    if current_user&.blocked
+      log_out
+      flash[:danger] = BLOCK_MSG
+      redirect_to root_url
+    end
+  end
+
+  BLOCK_MSG = "You've been blocked from the UIKonf Call for Proposals due to a violation of our code of conduct. If you feel like this happened in error, please contact us.".freeze
 end

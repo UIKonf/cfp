@@ -7,7 +7,10 @@ class GithubAuthenticationController < ApplicationController
     auth_hash = request.env['omniauth.auth']
     @user = User.find_by_github_uid(auth_hash[:uid]) || User.create_with_omniauth(auth_hash)
 
-    if @user
+    if @user&.blocked
+      flash[:danger] = GithubAuthenticationHelper::BLOCK_MSG
+      redirect_to root_url
+    elsif @user
       log_in(@user)
       flash[:success] = 'Logged in successfully'
       redirect_back_or user_url(@user)

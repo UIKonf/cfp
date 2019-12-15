@@ -89,7 +89,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'destroys comments' do
-
     @user.save
     @proposal = proposals(:one)
     @proposal.comments.create!(body: 'b' * 60, user_id: @user.id)
@@ -98,5 +97,28 @@ class UserTest < ActiveSupport::TestCase
     assert_difference 'Comment.count', -2 do
       @user.destroy
     end
+  end
+
+  test 'block! blocks user' do
+    @user.block!('testing')
+    assert @user.blocked
+  end
+
+  test 'block! sets block_reason' do
+    reason = 'a good reason'
+    @user.block!(reason)
+    assert @user.block_reason == reason
+  end
+
+  test 'unblock! unblocks user' do
+    @user.block!('reason')
+    @user.unblock!
+    assert_not @user.blocked
+  end
+
+  test 'unblock! removes reason' do
+    @user.block!('reason')
+    @user.unblock!
+    assert_nil @user.block_reason
   end
 end

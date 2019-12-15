@@ -59,4 +59,37 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to proposals_path
     assert_nil session[:forwarding_url]
   end
+
+  test 'cannot log in if blocked' do
+    OmniAuth.config.add_mock(:github, uid: @user.github_uid)
+    @user.block!('bad actor')
+
+    get login_path
+    assert_template 'github_authentication/new'
+
+    post '/auth/github'
+    assert_redirected_to '/auth/github/callback'
+    follow_redirect!
+    assert_not is_logged_in?
+    assert_redirected_to root_url
+  end
+
+  test 'gets logged out if blocked' do
+    OmniAuth.config.add_mock(:github, uid: @user.github_uid)
+
+    get login_path
+    assert_template 'github_authentication/new'
+
+    post '/auth/github'
+    assert_redirected_to '/auth/github/callback'
+    follow_redirect!
+    assert is_logged_in?
+    assert_redirected_to @user
+    follow_redirect!
+
+    @user.block!('bad actor')
+
+    get '/'
+    assert_not is_logged_in?
+  end
 end
