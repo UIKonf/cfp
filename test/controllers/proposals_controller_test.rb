@@ -107,4 +107,19 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     post withdraw_proposal_path(proposals(:two))
     assert_redirected_to proposals_path
   end
+
+  test 'non published proposal are visible to their user' do
+    log_in_as(@user)
+    @proposal.update(live: false)
+    get proposal_path(@proposal)
+    assert_response :success
+  end
+
+  test 'non published proposal should raise a RecordNotFound error if requested by non-author' do
+    log_in_as(users(:two))
+    @proposal.update(live: false)
+    assert_raises ActiveRecord::RecordNotFound do
+      get proposal_path(@proposal)
+    end
+  end
 end

@@ -12,6 +12,10 @@ class ProposalsController < ApplicationController
 
   def show
     @proposal = Proposal.find(params[:id])
+    if !@proposal.live && !current_user?(@proposal.user)
+      raise ActiveRecord::RecordNotFound
+    end
+
     @comment = Comment.new
   end
 
