@@ -7,12 +7,12 @@ class ProposalsController < ApplicationController
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
 
   def index
-    @proposals = Proposal.all.where(live: true)
+    @proposals = Proposal.all.where(state: 'published')
   end
 
   def show
     @proposal = Proposal.find(params[:id])
-    if !@proposal.live && !current_user?(@proposal.user)
+    if !@proposal.published? && !current_user?(@proposal.user)
       raise ActiveRecord::RecordNotFound
     end
 

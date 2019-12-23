@@ -8,7 +8,7 @@
   <% if @proposal.user == current_user %>
     <div class="alert alert-secondary">
       <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
-      <% if @proposal.live %>
+      <% if can_withdraw?(@proposal) %>
         <%= link_to 'Withdraw', withdraw_proposal_path(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
       <% else %>
         <%= link_to 'Publish', publish_proposal_path(@proposal), method: :post, class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
@@ -16,9 +16,9 @@
     </div>
   <% end %>
 
-  <% unless @proposal.live %>
+  <% if @proposal.withdrawn? %>
     <div class="alert alert-info" role="alert">
-      This proposal is not published.
+      This proposal has been withdrawn.
     </div>
   <% end %>
 
@@ -34,7 +34,7 @@
       <%= markdown(@proposal.description) %>
     </div>
     <div class="col-sm-4">
-      <% if @proposal.live %>
+      <% if show_comments?(@proposal) %>
         <h2>Comments</h2>
         <%= render partial: 'comments/comment', collection: @proposal.comments, locals: {author: @proposal.user} %>
 

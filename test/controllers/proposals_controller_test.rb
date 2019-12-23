@@ -58,7 +58,7 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     post publish_proposal_path(proposal)
 
     assert_redirected_to proposals_path
-    assert_not proposal.live
+    assert_not proposal.published?
   end
 
   test 'should delete' do

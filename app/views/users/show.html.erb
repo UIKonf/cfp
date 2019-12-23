@@ -9,9 +9,7 @@
     <% @user.proposals.each do |proposal| %>
       <a href="<%= proposal_path(proposal) %>" class="list-group-item list-group-item-action">
         <%= proposal.title %>
-        <% if proposal.live %>
-          <span class="badge badge-success">Live</span>
-        <% end %>
+        <span class="badge badge-info"><%= proposal.state %></span>
       </a>
     <% end %>
 <% end %>

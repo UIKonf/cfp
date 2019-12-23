@@ -4,10 +4,8 @@ one:
   user: one
   title: MyString
   description: MyString
-  live:
 
 two:
   user: two
   title: MyString
   description: MyString
-  live:
