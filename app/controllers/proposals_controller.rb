@@ -41,20 +41,20 @@ class ProposalsController < ApplicationController
   end
 
   def destroy
-    @proposal.destroy
+    @proposal.deleted!
 
     redirect_to proposals_path
   end
 
   def publish
-    @proposal.publish!
+    @proposal.published!
     flash[:success] = 'Your proposal has been published!'
 
     redirect_to @proposal
   end
 
   def withdraw
-    @proposal.withdraw!
+    @proposal.withdrawn!
     flash[:success] = 'Your proposal has been withdrawn!'
 
     redirect_to @proposal
@@ -71,7 +71,7 @@ class ProposalsController < ApplicationController
   end
 
   def allow_one_active_proposal
-    return unless current_user.proposals.where(live: true).count.positive?
+    return unless current_user.proposals.where(state: 'published').count.positive?
 
     flash[:warning] = "You already proposed a talk. Please withdraw it first if you'd like to propose another one."
     redirect_to proposals_url

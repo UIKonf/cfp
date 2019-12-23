@@ -35,17 +35,12 @@ class ProposalTest < ActiveSupport::TestCase
     assert_not @proposal.valid?
   end
 
-  test 'new proposals are not live' do
-    assert_not @proposal.live
+  test 'state should be present' do
+    @proposal.state = nil
+    assert_not @proposal.valid?
   end
 
-  test 'proposals can be published' do
-    @proposal.publish!
-    assert @proposal.live
-  end
-
-  test 'proposals can be withdrawn' do
-    @proposal.withdraw!
-    assert_not @proposal.live
+  test 'state defaults to draft' do
+    assert @proposal.draft?
   end
 end

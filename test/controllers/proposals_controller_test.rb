@@ -27,14 +27,14 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should not be able to create a proposal if another is active' do
     log_in_as(@user)
-    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: true)
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
     get new_proposal_url
     assert_redirected_to proposals_url
   end
 
   test 'should be able to create a proposal if others are not active' do
     log_in_as(@user)
-    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: false)
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'draft')
     get new_proposal_url
     assert_response :success
   end
@@ -53,8 +53,8 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'only one proposal can be published' do
     log_in_as(@user)
-    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: true)
-    proposal = @user.proposals.create!(title: 't' * 5, description: 'b' * 250, live: false)
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
+    proposal = @user.proposals.create!(title: 't' * 5, description: 'b' * 250)
     post publish_proposal_path(proposal)
 
     assert_redirected_to proposals_path
@@ -63,7 +63,7 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should delete' do
     log_in_as(@user)
-    assert_difference 'Proposal.count', -1 do
+    assert_difference 'Proposal.count', 0 do
       delete proposal_path(@proposal)
     end
     assert_redirected_to proposals_path
@@ -71,9 +71,10 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'only proposal author can destroy proposal' do
     log_in_as(@user)
-    proposal = users(:two).proposals.create!(title: 't' * 5, description: 'b' * 250, live: true)
+    proposal = users(:two).proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
     assert_difference 'Proposal.count', 0 do
       delete proposal_path(proposal)
+      assert proposal.published?
     end
     assert_redirected_to proposals_path
   end
@@ -110,14 +111,14 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'non published proposal are visible to their user' do
     log_in_as(@user)
-    @proposal.update(live: false)
+    @proposal.update(state: 'draft')
     get proposal_path(@proposal)
     assert_response :success
   end
 
   test 'non published proposal should raise a RecordNotFound error if requested by non-author' do
     log_in_as(users(:two))
-    @proposal.update(live: false)
+    @proposal.update(state: 'draft')
     assert_raises ActiveRecord::RecordNotFound do
       get proposal_path(@proposal)
     end
