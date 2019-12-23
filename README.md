@@ -4,6 +4,9 @@ UIKonf Call for Proposal application.
 
 ## Development
 
+You need a working installation of PostgreSQL, including having the command line tools in your PATH.
+Check the instructions on [postgresapp.com](https://postgresapp.com/).
+
 Bootstrap dependencies:
 
 ```
