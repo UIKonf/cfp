@@ -18,8 +18,14 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 
-  def set_mode(mode)
-    Cfp.mode = mode
+  def with_mode(mode)
+    old_mode = Cfp.mode.mode
+    begin
+      Cfp.mode = mode
+      yield
+    ensure
+      Cfp.mode = old_mode
+    end
   end
 end
 

@@ -5,8 +5,12 @@ class Proposal < ApplicationRecord
 
   validates :user_id, presence: true
   validates :state, presence: true
-  validates :title, presence: true, length: { minimum: 5 }
-  validates :description, presence: true, length: { minimum: 200 }
+  validates :title, presence: true, length: {minimum: 5}
+  validates :description, presence: true, length: {minimum: 200}
+
+  default_scope { where("state != 'deleted'") }
+  scope :published, -> { where(state: 'published') }
+  scope :preselected, -> { where(state: 'preselected') }
 
   STATES = %w{draft published preselected withdrawn deleted}
 

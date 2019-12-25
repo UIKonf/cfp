@@ -63,7 +63,7 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should delete' do
     log_in_as(@user)
-    assert_difference 'Proposal.count', 0 do
+    assert_difference 'Proposal.count', -1 do
       delete proposal_path(@proposal)
     end
     assert_redirected_to proposals_path
@@ -111,16 +111,39 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'non published proposal are visible to their user' do
     log_in_as(@user)
-    @proposal.update(state: 'draft')
-    get proposal_path(@proposal)
+    proposal = proposals(:draft)
+    get proposal_path(proposal)
     assert_response :success
   end
 
   test 'non published proposal should raise a RecordNotFound error if requested by non-author' do
     log_in_as(users(:two))
-    @proposal.update(state: 'draft')
+    proposal = proposals(:draft)
     assert_raises ActiveRecord::RecordNotFound do
-      get proposal_path(@proposal)
+      get proposal_path(proposal)
+    end
+  end
+
+  test 'withdrawn proposal are visible to other users' do
+    log_in_as(users(:two))
+    proposal = proposals(:withdrawn)
+    get proposal_path(proposal)
+    assert_response :success
+  end
+
+  test 'deleted proposals are not visible to the creator' do
+    proposal = proposals(:deleted)
+    log_in_as(proposal.user)
+    assert_raises ActiveRecord::RecordNotFound do
+      get proposal_path(proposal)
+    end
+  end
+
+  test 'deleted proposals are not visible to other users' do
+    log_in_as(users(:two))
+    proposal = proposals(:deleted)
+    assert_raises ActiveRecord::RecordNotFound do
+      get proposal_path(proposal)
     end
   end
 end

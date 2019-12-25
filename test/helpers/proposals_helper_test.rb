@@ -28,37 +28,50 @@ class ProposalsHelperTest < ActionView::TestCase
   end
 
   test 'show_comment_form? returns true when app is in cfp mode' do
-    Cfp.mode = :cfp
-    assert show_comment_form?
+    with_mode :cfp do
+      assert show_comment_form?
+    end
   end
 
   test 'show_comment_form? returns true when app is in review mode' do
-    Cfp.mode = :review
-    assert show_comment_form?
+    with_mode :review do
+      assert show_comment_form?
+    end
   end
 
   test 'show_comment_form? returns false when app is in hold mode' do
-    Cfp.mode = :hold
-    assert_not show_comment_form?
+    with_mode :hold do
+      assert_not show_comment_form?
+    end
   end
 
   test 'show_comment_form? returns false when app is in selection mode' do
-    Cfp.mode = :selection
-    assert_not show_comment_form?
+    with_mode :selection do
+      assert_not show_comment_form?
+    end
   end
 
   test 'show_comment_form? returns false when app is in archive mode' do
-    Cfp.mode = :archive
-    assert_not show_comment_form?
+    with_mode :archive do
+      assert_not show_comment_form?
+    end
   end
 
   test 'can_edit? returns true when app is in cfp mode' do
-    Cfp.mode = :cfp
-    assert can_edit?
+    with_mode :cfp do
+      assert can_edit?
+    end
   end
 
   test 'can_edit? returns true when app is in review mode' do
-    Cfp.mode = :review
-    assert can_edit?
+    with_mode :review do
+      assert can_edit?
+    end
+  end
+
+  test 'default scope filters out deleted proposals' do
+    assert_difference 'Proposal.all.count', 0 do
+      Proposal.create!(user: users(:one), title: 't'*20, description: 'd'*300, state: 'deleted')
+    end
   end
 end

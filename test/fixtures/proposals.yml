@@ -3,9 +3,27 @@
 one:
   user: one
   title: MyString
-  description: MyString
+  description: <%= 'MyString' * 200 %>
 
 two:
   user: two
   title: MyString
-  description: MyString
+  description: <%= 'MyString' * 200 %>
+
+draft:
+  user: one
+  title: The Title
+  description: Faker::Markdown.sandwich
+  state: draft
+
+withdrawn:
+  user: one
+  title: The Title
+  description: Faker::Markdown.sandwich
+  state: withdrawn
+
+deleted:
+  user: one
+  title: The Title
+  description: Faker::Markdown.sandwich
+  state: deleted
