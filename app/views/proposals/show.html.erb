@@ -6,19 +6,26 @@
   </div>
 <% else %>
   <% if @proposal.user == current_user %>
-    <div class="alert alert-secondary">
-      <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
-      <% if can_withdraw?(@proposal) %>
-        <%= link_to 'Withdraw', withdraw_proposal_path(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
-      <% else %>
-        <%= link_to 'Publish', publish_proposal_path(@proposal), method: :post, class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
-      <% end %>
+    <div class="alert alert-secondary d-flex flex-row align-items-center">
+      <div>
+        You are the author of this proposal
+      </div>
+      <div class="ml-auto">
+        <% if can_edit? %>
+          <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
+        <% end %>
+        <% if @proposal.can_withdraw? && can?(:withdraw, :proposal) %>
+          <%= link_to 'Withdraw', withdraw_proposal_path(@proposal), method: :post, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+        <% elsif @proposal.can_publish? && can?(:publish, :proposal) %>
+          <%= link_to 'Publish', publish_proposal_path(@proposal), method: :post, class: 'btn btn-warning', data: {confirm: 'Are you sure?'} %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
   <% if @proposal.withdrawn? %>
     <div class="alert alert-info" role="alert">
-      This proposal has been withdrawn.
+      This proposal has been withdrawn
     </div>
   <% end %>
 
@@ -38,7 +45,9 @@
         <h2>Comments</h2>
         <%= render partial: 'comments/comment', collection: @proposal.comments, locals: {author: @proposal.user} %>
 
-        <%= render 'comments/form' %>
+        <% if show_comment_form? %>
+          <%= render 'comments/form' %>
+        <% end %>
       <% end %>
     </div>
   </div>

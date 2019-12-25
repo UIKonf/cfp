@@ -20,4 +20,11 @@ class Proposal < ApplicationRecord
     end
   end
 
+  def can_publish?
+    %w{draft withdrawn}.include?(self.state)
+  end
+
+  def can_withdraw?
+    %w{published preselected}.include?(self.state)
+  end
 end

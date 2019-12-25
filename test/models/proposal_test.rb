@@ -43,4 +43,24 @@ class ProposalTest < ActiveSupport::TestCase
   test 'state defaults to draft' do
     assert @proposal.draft?
   end
+
+  test 'can_publish? is true when state is draft' do
+    @proposal.update(state: 'draft')
+    assert @proposal.can_publish?
+  end
+
+  test 'can_publish? is true when state is withdrawn' do
+    @proposal.update(state: 'withdrawn')
+    assert @proposal.can_publish?
+  end
+
+  test 'can_withdraw? is true when state is published' do
+    @proposal.update(state: 'published')
+    assert @proposal.can_withdraw?
+  end
+
+  test 'can_withdraw? is true when state is preselected' do
+    @proposal.update(state: 'preselected')
+    assert @proposal.can_withdraw?
+  end
 end
