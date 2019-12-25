@@ -9,6 +9,8 @@ class ProposalsController < ApplicationController
   def index
     if Cfp.mode.mode == :selection
       @proposals = Proposal.preselected
+    elsif Cfp.mode.mode == :hold
+      @proposals = Proposal.published_and_preselected
     else
       @proposals = Proposal.published
     end

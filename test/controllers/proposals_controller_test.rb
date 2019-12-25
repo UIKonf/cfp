@@ -146,4 +146,31 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
       get proposal_path(proposal)
     end
   end
+
+  test 'published scope' do
+    log_in_as(@user)
+    assert_difference 'Proposal.published.count', 1 do
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'preselected')
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'draft')
+    end
+  end
+
+  test 'published and preselected scope' do
+    log_in_as(@user)
+    assert_difference 'Proposal.published_and_preselected.count', 2 do
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'preselected')
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'draft')
+    end
+  end
+
+  test 'preselected scope' do
+    log_in_as(@user)
+    assert_difference 'Proposal.preselected.count', 1 do
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'preselected')
+      @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'draft')
+    end
+  end
 end
