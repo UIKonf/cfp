@@ -99,6 +99,16 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test 'destroys selections' do
+    @user.save
+    @proposal = proposals(:one)
+    selection = Selection.create!(user: @user, proposal: @proposal)
+
+    assert_difference 'Selection.count', -1 do
+      @user.destroy
+    end
+  end
+
   test 'block! blocks user' do
     @user.block!('testing')
     assert @user.blocked

@@ -2,6 +2,7 @@ class Proposal < ApplicationRecord
   belongs_to :user
 
   has_many :comments, dependent: :destroy
+  has_many :selections, dependent: :destroy
 
   validates :user_id, presence: true
   validates :state, presence: true

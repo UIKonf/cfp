@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_173305) do
+ActiveRecord::Schema.define(version: 2019_12_26_174548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 2019_12_23_173305) do
     t.bigint "user_id", null: false
     t.string "state", default: "draft"
     t.index ["user_id"], name: "index_proposals_on_user_id"
+  end
+
+  create_table "selections", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "proposal_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["proposal_id"], name: "index_selections_on_proposal_id"
+    t.index ["user_id", "proposal_id"], name: "index_selections_on_user_id_and_proposal_id", unique: true
+    t.index ["user_id"], name: "index_selections_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

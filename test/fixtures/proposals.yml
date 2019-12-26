@@ -22,6 +22,12 @@ withdrawn:
   description: Faker::Markdown.sandwich
   state: withdrawn
 
+preselected:
+  user: one
+  title: The Title
+  description: Faker::Markdown.sandwich
+  state: preselected
+
 deleted:
   user: one
   title: The Title
