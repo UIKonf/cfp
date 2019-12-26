@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
-  get 'github_authentication/callback'
-  get 'github_authentication/logout'
   root 'welcome#index'
-
-  resources :users, only: [:show]
 
   # Authentication and session management
   get '/login', to: 'github_authentication#new'
   get '/auth/github/callback', to: 'github_authentication#callback'
   get '/auth/failure', to: 'github_authentication#failure'
   delete '/logout', to: 'github_authentication#logout'
+
+  resources :users, only: [:show] do
+    resources :selections, only: %i[index create destroy]
+  end
 
   resources :proposals do
     resources :comments, only: %i[index create destroy]
@@ -19,5 +19,4 @@ Rails.application.routes.draw do
       post :withdraw
     end
   end
-
 end
