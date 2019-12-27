@@ -12,7 +12,14 @@ class SelectionsController < ApplicationController
   end
 
   def create
-    selection = current_user.selections.create(proposal_id: params[:proposal_id])
+    proposal = Proposal.find(params[:proposal_id])
+    unless proposal.preselected?
+      flash[:error] = "You can only select a preselected proposal"
+      redirect_to root_url
+      return
+    end
+
+    selection = current_user.selections.create(proposal: proposal)
     if selection.save
       redirect_to user_selections_url
     else
@@ -27,10 +34,6 @@ class SelectionsController < ApplicationController
   end
 
   private
-
-  def selection_params
-    params.require(:selection).permit(:proposal_id)
-  end
 
   def check_mode
     check_mode_for_object(:selection)

@@ -35,12 +35,12 @@ class Mode
                comment: %i[destroy]),
     selection:
       mode_for(user: %i[log_in show],
-               proposal: %i[index show withdraw destroy],
+               proposal: %i[show withdraw destroy],
                comment: %i[destroy],
                selection: %i[index create destroy]),
     archive:
       mode_for(user: %i[log_in show],
-               proposal: %i[index show withdraw destroy],
+               proposal: %i[show withdraw destroy],
                comment: %i[destroy],
                selection: %i[index])
   }.freeze

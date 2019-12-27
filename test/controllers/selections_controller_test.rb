@@ -41,6 +41,14 @@ class SelectionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :found
   end
 
+  test 'cannot select proposal that is not preselected' do
+    log_in_as(@user)
+    assert_difference 'Selection.count', 0 do
+      post user_selections_url(@user), params: {proposal_id: proposals(:draft).id}
+    end
+    assert_response :redirect
+  end
+
   test 'should delete' do
     log_in_as(@user)
     assert_difference 'Selection.count', -1 do

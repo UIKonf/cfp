@@ -8,7 +8,9 @@
       <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
 
       <% if logged_in? %>
-        <li class="nav-item"><%= link_to 'Proposals', proposals_path, class: 'nav-link' %></li>
+        <% if can?(:index, :proposal) %>
+          <li class="nav-item"><%= link_to 'Proposals', proposals_path, class: 'nav-link' %></li>
+        <% end %>
         <% if can?(:index, :selection) %>
           <li class="nav-item"><%= link_to 'Selection', user_selections_path(current_user), class: 'nav-link' %></li>
         <% end %>
