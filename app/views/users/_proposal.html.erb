@@ -1,0 +1,12 @@
+<a href="<%= proposal_path(proposal) %>" class="list-group-item list-group-item-action d-flex align-items-center">
+  <div class="flex-fill">
+    <%= proposal.title %>
+  </div>
+  <% if proposal.draft? %>
+    <span class="badge badge-warning"><%= proposal.state %></span>
+  <% elsif proposal.published? || proposal.preselected? %>
+    <span class="badge badge-success"><%= proposal.state %></span>
+  <% else %>
+    <span class="badge badge-info"><%= proposal.state %></span>
+  <% end %>
+</a>

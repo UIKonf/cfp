@@ -5,12 +5,7 @@
 <% else %>
   <h1>Your proposals</h1>
   <ul class="list-group">
-    <% @user.proposals.each do |proposal| %>
-      <a href="<%= proposal_path(proposal) %>" class="list-group-item list-group-item-action">
-        <%= proposal.title %>
-        <span class="badge badge-info"><%= proposal.state %></span>
-      </a>
-    <% end %>
+    <%= render partial: 'users/proposal', collection: @user.proposals %>
   </ul>
 <% end %>
 
