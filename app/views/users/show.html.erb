@@ -3,7 +3,10 @@
 <% if @user.proposals.empty? %>
   <%= link_to 'New proposal', new_proposal_path, class: "btn btn-primary" %>
 <% else %>
-  <h1>Your proposals</h1>
+  <div class="d-flex align-items-center">
+    <h1 class="flex-fill">Your Proposals</h1>
+    <%= create_proposal_button %>
+  </div>
   <ul class="list-group">
     <%= render partial: 'users/proposal', collection: @user.proposals %>
   </ul>

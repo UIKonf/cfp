@@ -2,9 +2,7 @@
 
 <div class="d-flex align-items-center">
   <h1 class="flex-fill">Proposals</h1>
-  <% if can?(:create, :proposal) %>
-    <%= link_to 'New proposal', new_proposal_path, class: "btn btn-primary" %>
-  <% end %>
+  <%= create_proposal_button %>
 </div>
 
 <div class="list-group">
