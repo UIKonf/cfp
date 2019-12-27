@@ -1,9 +1,13 @@
-<li class="list-group-item">
-  <div class="d-flex flex-row align-items-center">
-    <%= link_to proposal.title, proposal_path(proposal), class: 'flex-fill' %>
-    <%= form_with url: user_selections_path(current_user) do %>
-      <%= hidden_field_tag :proposal_id, proposal.id %>
-      <%= submit_tag 'Select', class: 'btn btn-outline-success' %>
-    <% end %>
-  </div>
-</li>
+<% if can?(:create, :selection) %>
+  <li class="list-group-item">
+    <div class="d-flex flex-row align-items-center">
+      <%= link_to proposal.title, proposal_path(proposal), class: 'flex-fill' %>
+      <%= form_with url: user_selections_path(current_user) do %>
+        <%= hidden_field_tag :proposal_id, proposal.id %>
+        <%= submit_tag 'Select', class: 'btn btn-outline-success' %>
+      <% end %>
+    </div>
+  </li>
+<% else %>
+  <%= link_to proposal.title, proposal_path(proposal), class: 'list-group-item list-group-item-action' %>
+<% end %>

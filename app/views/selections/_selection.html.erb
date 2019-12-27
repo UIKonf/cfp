@@ -1,9 +1,13 @@
-<li class="list-group-item">
-  <div class="d-flex flex-row align-items-center">
-    <%= link_to selection.proposal.title, proposal_path(selection.proposal), class: 'flex-fill' %>
-    <%= form_with url: user_selection_path(current_user, selection), method: :delete do %>
-      <%= hidden_field_tag :proposal_id, selection.proposal.id %>
-      <%= submit_tag 'Deselect', class: 'btn btn-outline-danger' %>
-    <% end %>
-  </div>
-</li>
+<% if can?(:destroy, :selection) %>
+  <li class="list-group-item">
+    <div class="d-flex flex-row align-items-center">
+      <%= link_to selection.proposal.title, proposal_path(selection.proposal), class: 'flex-fill' %>
+      <%= form_with url: user_selection_path(current_user, selection), method: :delete do %>
+        <%= hidden_field_tag :proposal_id, selection.proposal.id %>
+        <%= submit_tag 'Deselect', class: 'btn btn-outline-danger' %>
+      <% end %>
+    </div>
+  </li>
+<% else %>
+  <%= link_to selection.proposal.title, proposal_path(selection.proposal), class: 'list-group-item list-group-item-action' %>
+<% end %>
