@@ -11,7 +11,7 @@
         You are the author of this proposal
       </div>
       <div class="ml-auto">
-        <% if can_edit? %>
+        <% if can?(:update, :proposal) %>
           <%= link_to 'Edit', edit_proposal_path(@proposal), class: 'btn btn-success' %>
         <% end %>
         <% if @proposal.can_withdraw? && can?(:withdraw, :proposal) %>
@@ -45,7 +45,7 @@
         <h2>Comments</h2>
         <%= render partial: 'comments/comment', collection: @proposal.comments, locals: {author: @proposal.user} %>
 
-        <% if show_comment_form? %>
+        <% if can?(:create, :comment) %>
           <%= render 'comments/form' %>
         <% end %>
       <% end %>
