@@ -4,6 +4,6 @@
 
 <%= render 'form' %>
 
-<div class="my-2">
-  <%= link_to 'Delete Proposal', proposal_path(@proposal), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+<div class="d-flex flex-row-reverse">
+  <%= delete_button %>
 </div>
