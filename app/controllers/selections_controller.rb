@@ -4,7 +4,11 @@ class SelectionsController < ApplicationController
 
   def index
     @selections = current_user.selections
-    @proposals = Proposal.preselected
+    if @selections.count > 0
+      @proposals = Proposal.preselected.where("id NOT IN (?)", @selections.map { |s| s.proposal_id })
+    else
+      @proposals = Proposal.preselected
+    end
   end
 
   def create
