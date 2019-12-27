@@ -2,32 +2,14 @@
 
 You can add up to 8 talks to your selection.
 
-<h1>Your selection</h1>
-<ul class="list-group">
-  <% @selections.each do |selection| %>
-    <li class="list-group-item">
-      <div class="d-flex flex-row align-items-center">
-        <%= link_to selection.proposal.title, proposal_path(selection.proposal), class: 'flex-fill' %>
-        <%= form_with url: user_selection_path(current_user, selection), method: :delete do %>
-          <%= hidden_field_tag :proposal_id, selection.proposal.id %>
-          <%= submit_tag 'Deselect', class: 'btn btn-outline-danger' %>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
-</ul>
+<% unless @selections.empty? %>
+  <h1>Your selection</h1>
+  <ul class="list-group">
+    <%= render partial: 'selections/selection', collection: @selections %>
+  </ul>
+<% end %>
 
 <h1>Proposals</h1>
 <ul class="list-group">
-  <% @proposals.each do |proposal| %>
-    <li class="list-group-item">
-      <div class="d-flex flex-row align-items-center">
-        <%= link_to proposal.title, proposal_path(proposal), class: 'flex-fill' %>
-        <%= form_with url: user_selections_path(current_user) do %>
-          <%= hidden_field_tag :proposal_id, proposal.id %>
-          <%= submit_tag 'Select', class: 'btn btn-outline-success' %>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
+  <%= render partial: 'selections/proposal', collection: @proposals %>
 </ul>
