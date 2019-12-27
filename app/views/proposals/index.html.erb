@@ -1,23 +1,14 @@
-<%  provide(:title, 'Proposals') %>
+<% provide(:title, 'Proposals') %>
 
-<%= link_to 'New proposal', new_proposal_path, class: "btn btn-primary" %>
-
-<h1>Proposals</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Updated at</th>
-    <th colspan="3"></th>
-  </tr>
-
-  <% @proposals.each do |proposal| %>
-    <tr>
-      <td><%= proposal.title %></td>
-      <td><%= proposal.updated_at %></td>
-      <td><%= link_to 'Show', proposal_path(proposal) %></td>
-      <td><%= link_to 'Edit', edit_proposal_path(proposal) %></td>
-      <td><%= link_to 'Destroy', proposal_path(proposal), method: :delete, data: {confirm: 'Are you sure?'} %></td>
-    </tr>
+<div class="d-flex align-items-center">
+  <h1 class="flex-fill">Proposals</h1>
+  <% if can?(:create, :proposal) %>
+    <%= link_to 'New proposal', new_proposal_path, class: "btn btn-primary" %>
   <% end %>
-</table>
+</div>
+
+<div class="list-group">
+  <% @proposals.each do |proposal| %>
+    <%= link_to proposal.title, proposal_path(proposal), class: 'list-group-item list-group-item-action' %>
+  <% end %>
+</div>
