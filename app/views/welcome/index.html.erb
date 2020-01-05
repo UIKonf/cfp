@@ -1,9 +1,40 @@
 <div class="center jumbotron">
-  <h1>UIKonf Call for Proposals</h1>
-
+  <h1 class="display-4">
+    UIKonf Call for Proposals
+  </h1>
+  <p class="lead">
+    Welcome to the UIKonf Call for Proposal website! If you'd like to know more about the process, check
+    the <%= link_to 'About', about_path %> page.
+  </p>
+  <hr class="my-4">
   <% if logged_in? %>
-    <%= link_to 'Proposals', proposals_path, class: 'btn btn-lg btn-primary' %>
+    <% if mode?(:inactive) %>
+      <p>
+        We haven't opened the CfP just yet.
+      </p>
+    <% elsif mode?(:cfp) %>
+      <p>
+        The CfP is opened, you can create proposals and add comments.
+      </p>
+      <%= link_to 'Proposals', proposals_path, class: 'btn btn-lg btn-primary' %>
+    <% elsif mode?(:review) %>
+      <p>
+        The CfP is in review mode, you can view proposals and add comments.
+      </p>
+      <%= link_to 'Proposals', proposals_path, class: 'btn btn-lg btn-primary' %>
+    <% elsif mode?(:hold) %>
+    <% elsif mode?(:selection) %>
+      <p>
+        Now's the time to select the proposals you'd like to see at UIKonf.
+      </p>
+      <%= link_to 'Selection', user_selections_path, class: 'btn btn-lg btn-primary' %>
+    <% elsif mode?(:archive) %>
+      <p>
+        The talks have been selected. See you at UIKonf!
+      </p>
+      <%= link_to 'Selection', user_selections_path, class: 'btn btn-lg btn-primary' %>
+    <% end %>
   <% else %>
-    <%= link_to 'Log in now!', login_path, class: 'btn btn-lg btn-primary' %>
+    <%= link_to 'Log in via GitHub', '/auth/github', method: :post, class: 'btn btn-lg btn-primary' %>
   <% end %>
 </div>

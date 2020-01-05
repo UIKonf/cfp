@@ -9,4 +9,8 @@ module ModesHelper
   def can?(action, object)
     Cfp.mode.can?(action, object)
   end
+
+  def mode?(mode)
+    Cfp.mode.mode == mode
+  end
 end
