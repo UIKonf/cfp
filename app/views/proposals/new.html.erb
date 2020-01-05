@@ -1,5 +1,13 @@
-<%  provide(:title, 'New proposal') %>
+<% provide(:title, 'New proposal') %>
 
 <h1>New Proposal</h1>
+
+<p>
+  So you want to talk at UIKonf? That's awesome!
+</p>
+<p>
+  If you haven't already, you may wish to <%= link_to 'read about the CfP process', about_path %> to find out how
+  everything works.
+</p>
 
 <%= render 'form' %>
