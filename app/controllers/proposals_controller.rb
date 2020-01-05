@@ -7,11 +7,12 @@ class ProposalsController < ApplicationController
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
 
   def index
-    if Cfp.mode.mode == :selection
-      @proposals = Proposal.preselected
+    @proposals = if Cfp.mode.mode == :selection
+      Proposal.preselected
     else
-      @proposals = Proposal.published_and_preselected
-    end
+      Proposal.published_and_preselected
+                 end
+    @withdrawn_proposals = Proposal.withdrawn
   end
 
   def show

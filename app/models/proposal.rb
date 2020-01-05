@@ -13,6 +13,7 @@ class Proposal < ApplicationRecord
   scope :published, -> { where(state: 'published') }
   scope :published_and_preselected, -> { where("state IN ('published', 'preselected')") }
   scope :preselected, -> { where(state: 'preselected') }
+  scope :withdrawn, -> { where(state: 'withdrawn') }
 
   STATES = %w{draft published preselected withdrawn deleted}
 
