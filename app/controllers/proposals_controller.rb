@@ -8,9 +8,9 @@ class ProposalsController < ApplicationController
 
   def index
     @proposals = if Cfp.mode.mode == :selection
-      Proposal.preselected
+      Proposal.preselected.shuffle
     else
-      Proposal.published_or_preselected
+      Proposal.published_or_preselected.shuffle
                  end
     @withdrawn_proposals = Proposal.withdrawn
   end
