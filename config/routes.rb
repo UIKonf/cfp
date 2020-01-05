@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+  get '/about', to: 'welcome#about'
+
   # Authentication and session management
   get '/login', to: 'github_authentication#new'
   get '/auth/github/callback', to: 'github_authentication#callback'

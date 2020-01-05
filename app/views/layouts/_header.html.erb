@@ -6,6 +6,7 @@
     <% end %>
     <div class="navbar-nav navbar-auto">
       <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
+      <li class="nav-item"><%= link_to 'About', about_path, class: 'nav-link' %></li>
 
       <% if logged_in? %>
         <% if can?(:index, :proposal) %>
