@@ -10,7 +10,7 @@ class ProposalsController < ApplicationController
     @proposals = if Cfp.mode.mode == :selection
       Proposal.preselected
     else
-      Proposal.published_and_preselected
+      Proposal.published_or_preselected
                  end
     @withdrawn_proposals = Proposal.withdrawn
   end

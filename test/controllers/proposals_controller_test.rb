@@ -158,7 +158,7 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'published and preselected scope' do
     log_in_as(@user)
-    assert_difference 'Proposal.published_and_preselected.count', 2 do
+    assert_difference 'Proposal.published_or_preselected.count', 2 do
       @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
       @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'preselected')
       @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'draft')

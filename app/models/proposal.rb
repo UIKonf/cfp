@@ -11,7 +11,7 @@ class Proposal < ApplicationRecord
 
   default_scope { where("state != 'deleted'") }
   scope :published, -> { where(state: 'published') }
-  scope :published_and_preselected, -> { where("state IN ('published', 'preselected')") }
+  scope :published_or_preselected, -> { where("state IN ('published', 'preselected')") }
   scope :preselected, -> { where(state: 'preselected') }
   scope :withdrawn, -> { where(state: 'withdrawn') }
 
