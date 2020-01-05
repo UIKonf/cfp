@@ -173,4 +173,12 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
       @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'draft')
     end
   end
+
+  test 'without_comments_from returns proposals the user commented on' do
+    assert Proposal.all.count > Proposal.without_comments_from(users(:one)).count
+  end
+
+  test 'without_comments_from returns all proposals if the user has not commented' do
+    assert_equal Proposal.all.count, Proposal.without_comments_from(users(:no_comment)).count
+  end
 end

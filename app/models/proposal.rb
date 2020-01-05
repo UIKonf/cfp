@@ -14,6 +14,11 @@ class Proposal < ApplicationRecord
   scope :published_or_preselected, -> { where("state IN ('published', 'preselected')") }
   scope :preselected, -> { where(state: 'preselected') }
   scope :withdrawn, -> { where(state: 'withdrawn') }
+  scope :without_comments_from, lambda { |user|
+    if user.comments.any?
+      where('proposals.id NOT IN (?)', user.comments.map(&:proposal_id).uniq)
+    end
+  }
 
   STATES = %w{draft published preselected withdrawn deleted}
 

@@ -27,3 +27,10 @@ bad_person:
   email: not_cool@example.com
   github_uid: github_uid_not_cool
   github_nickname: github_nickname_not_cool
+
+no_comment:
+  name: no comment
+  public_name: f6fnope
+  email: nope@example.com
+  github_uid: github_uid_nope
+  github_nickname: github_nickname_nope
