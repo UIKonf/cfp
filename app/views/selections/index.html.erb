@@ -1,15 +1,34 @@
 <% provide(:title, 'Selection') %>
 
-You can add up to 8 talks to your selection.
+<section>
+  <h1>
+    Your selection
+  </h1>
+  <p>
+    You can add up to 8 proposals to your selection.
+  </p>
+</section>
 
-<% unless @selections.empty? %>
-  <h1>Your selection</h1>
+<section>
+  <% if @selections.empty? %>
+    <p>
+      You haven't selected any proposals yet.
+    </p>
+  <% else %>
+    <p>
+      Here are the proposals you selected:
+    </p>
+    <ul class="list-group">
+      <%= render partial: 'selections/selection', collection: @selections %>
+    </ul>
+  <% end %>
+</section>
+
+<section class="mt-4">
+  <p>
+    Here are the proposals you can select:
+  </p>
   <ul class="list-group">
-    <%= render partial: 'selections/selection', collection: @selections %>
+    <%= render partial: 'selections/proposal', collection: @proposals %>
   </ul>
-<% end %>
-
-<h1>Proposals</h1>
-<ul class="list-group">
-  <%= render partial: 'selections/proposal', collection: @proposals %>
-</ul>
+</section>
