@@ -25,7 +25,9 @@
             <%= link_to 'Log Out', logout_path, method: :delete, class: 'dropdown-item' %>
           </div>
       <% else %>
-        <li class="nav-item"><%= link_to 'Log In', login_path, class: 'nav-link' %></li>
+        <% if can?(:log_in, :user) %>
+          <li class="nav-item"><%= link_to 'Log In', login_path, class: 'nav-link' %></li>
+        <% end %>
       <% end %>
       </ul>
     </div>
