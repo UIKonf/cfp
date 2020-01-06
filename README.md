@@ -7,24 +7,22 @@ UIKonf Call for Proposal application.
 You need a working installation of PostgreSQL, including having the command line tools in your PATH.
 Check the instructions on [postgresapp.com](https://postgresapp.com/).
 
-Bootstrap dependencies:
+Bootstrap all dependencies:
 
 ```
 bin/setup
 ```
 
-Run application locally:
+Run the application locally:
 
 ```
 bin/rails server
 ```
 
-## Monitoring
-
-Check logs:
+Run the tests:
 
 ```
-heroku logs -t
+bin/rails test
 ```
 
 ## Application configuration
