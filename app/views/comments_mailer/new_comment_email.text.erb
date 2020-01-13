@@ -1,0 +1,7 @@
+Hi there!
+
+<%= @comment.user.public_name %> just commented on your proposal:
+
+<%= @comment.body %>
+
+Visit this link to reply: <%= proposal_url(@proposal) %>

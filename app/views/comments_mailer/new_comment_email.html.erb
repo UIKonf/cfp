@@ -1,0 +1,12 @@
+<p>
+  Hi there!
+</p>
+<p>
+  <strong><%= @comment.user.public_name %></strong> just commented on your proposal:
+</p>
+<blockquote>
+  <%= @comment.body %>
+</blockquote>
+<p>
+  <%= link_to 'Visit', proposal_url(@proposal) %> your proposal to reply!
+</p>

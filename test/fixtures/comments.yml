@@ -15,3 +15,8 @@ hidden:
   proposal: two
   user: bad_person
   hidden: true
+
+comment_from_one_on_two:
+  body: This is a comment
+  proposal: one
+  user: two

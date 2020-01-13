@@ -20,6 +20,20 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to @proposal
   end
 
+  test 'should send an email' do
+    log_in_as(users(:two))
+    assert_emails 1 do
+      post proposal_comments_path(@proposal), params: {comment: {body: 'b' * 200}}
+    end
+  end
+
+  test 'should not send an email if the author adds a comment' do
+    log_in_as(@user)
+    assert_emails 0 do
+      post proposal_comments_path(@proposal), params: {comment: {body: 'b' * 200}}
+    end
+  end
+
   test 'render proposals/show when comment is invalid' do
     log_in_as(@user)
     assert_difference 'Comment.count', 0 do

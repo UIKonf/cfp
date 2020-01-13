@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     @proposal = Proposal.find(params[:proposal_id])
     @comment = current_user.comments.create(comment_params.merge(proposal: @proposal))
     if @comment.save
+      CommentsMailer.with(proposal: @proposal, comment: @comment).new_comment_email.deliver_later unless current_user?(@proposal.user)
       redirect_to proposal_path(@proposal)
     else
       render 'proposals/show'

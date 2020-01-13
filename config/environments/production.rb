@@ -60,6 +60,15 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "cfp_production"
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: Rails.application.credentials.sendgrid[:username],
+    password: Rails.application.credentials.sendgrid[:password],
+    domain: 'uikonf.com',
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain
+  }
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
