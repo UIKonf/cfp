@@ -4,7 +4,7 @@ class CommentTest < ActiveSupport::TestCase
   def setup
     @user = users(:sabine)
     @proposal = proposals(:one)
-    @comment = @proposal.comments.build(body: 'b' * 51, user_id: @user.id)
+    @comment = @proposal.comments.build(body: 'b' * 10, user_id: @user.id)
   end
 
   test 'should be valid' do
@@ -21,8 +21,8 @@ class CommentTest < ActiveSupport::TestCase
     assert_not @comment.valid?
   end
 
-  test 'body should be longer than 50 characters' do
-    @comment.body = 'b' * 49
+  test 'body should be longer than 10 characters' do
+    @comment.body = 'b' * 9
     assert_not @comment.valid?
   end
 
