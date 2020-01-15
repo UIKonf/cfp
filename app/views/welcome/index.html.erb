@@ -14,7 +14,7 @@
       </p>
     <% elsif mode?(:cfp) %>
       <p>
-        The CfP is opened, you can create proposals and add comments.
+        The CfP is open, you can create proposals and add comments.
       </p>
       <%= link_to 'Proposals', proposals_path, class: 'btn btn-lg btn-primary' %>
     <% elsif mode?(:review) %>
@@ -27,12 +27,12 @@
       <p>
         Now's the time to select the proposals you'd like to see at UIKonf.
       </p>
-      <%= link_to 'Selection', user_selections_path, class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Selections', user_selections_path, class: 'btn btn-lg btn-primary' %>
     <% elsif mode?(:archive) %>
       <p>
         The talks have been selected. See you at UIKonf!
       </p>
-      <%= link_to 'Selection', user_selections_path, class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Selections', user_selections_path, class: 'btn btn-lg btn-primary' %>
     <% end %>
   <% else %>
     <% if can?(:log_in, :user) %>
