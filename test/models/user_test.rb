@@ -79,6 +79,18 @@ class UserTest < ActiveSupport::TestCase
     assert auth_user.valid?
   end
 
+  test 'create with omniauth without name' do
+    auth_hash = {
+      uid: 'the_uid',
+      info: {
+        email: 'email@example.com',
+        nickname: '@nickname'
+      }
+    }
+    auth_user = User.create_with_omniauth(auth_hash)
+    assert auth_user.valid?
+  end
+
   test 'destroys proposal' do
     @user.save
     @user.proposals.create!(title: 't' * 5, description: 'b' * 250)
