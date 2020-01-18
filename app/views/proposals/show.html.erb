@@ -39,8 +39,12 @@
         <h2>Comments</h2>
         <%= render partial: 'comments/comment', collection: @proposal.comments, locals: {author: @proposal.user} %>
 
-        <% if can?(:create, :comment) %>
-          <%= render 'comments/form' %>
+        <% if logged_in? %>
+          <% if can?(:create, :comment) %>
+            <%= render 'comments/form' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Log in to comment', '/auth/github', method: :post, class: 'btn btn-lg btn-primary' %>
         <% end %>
       <% end %>
     </div>

@@ -35,11 +35,11 @@
       <%= link_to 'Selections', user_selections_path, class: 'btn btn-lg btn-primary' %>
     <% end %>
   <% else %>
-    <% if can?(:log_in, :user) %>
-      <%= link_to 'Log in via GitHub', '/auth/github', method: :post, class: 'btn btn-lg btn-primary' %>
+    <% if can?(:index, :proposal) %>
+      <%= link_to 'Proposals', proposals_path, class: 'btn btn-lg btn-primary' %>
     <% else %>
       <p>
-        You can't log in at this stage, come back soon!
+        There's not much happening at this stage, come back soon!
       </p>
     <% end %>
   <% end %>

@@ -8,13 +8,7 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     @proposal = proposals(:one)
   end
 
-  test 'only accessible when logged in' do
-    get proposals_url
-    assert_authenticated_only
-  end
-
-  test 'should get index' do
-    log_in_as(@user)
+  test 'accessible when logged out' do
     get proposals_url
     assert_response :success
   end

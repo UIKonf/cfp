@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProposalsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index show]
   before_action :check_mode
   before_action :allow_one_active_proposal, only: %i[new create publish]
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
@@ -16,6 +16,7 @@ class ProposalsController < ApplicationController
   end
 
   def show
+    store_location unless logged_in? # Store location in case a user logs in
     @proposal = Proposal.find(params[:id])
     if @proposal.deleted? || @proposal.draft? && !current_user?(@proposal.user)
       raise ActiveRecord::RecordNotFound
