@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProposalsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show feed]
   before_action :check_mode
   before_action :allow_one_active_proposal, only: %i[new create publish]
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
@@ -13,6 +13,10 @@ class ProposalsController < ApplicationController
       Proposal.published_or_preselected.shuffle
                  end
     @withdrawn_proposals = Proposal.withdrawn
+  end
+
+  def feed
+    @proposals = Proposal.published_or_preselected.last(10)
   end
 
   def show

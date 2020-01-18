@@ -1,4 +1,7 @@
 <% provide(:title, 'Proposals') %>
+<% content_for :head do %>
+  <%= auto_discovery_link_tag :rss, proposals_feed_url(:format => :rss) %>
+<% end %>
 
 <div class="d-flex align-items-center">
   <h1 class="flex-fill">Proposals</h1>

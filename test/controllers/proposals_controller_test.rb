@@ -13,6 +13,11 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'returns an RSS feed' do
+    get proposals_feed_url, headers: { 'HTTP_ACCEPT' => "application/rss+xml" }
+    assert_response :success
+  end
+
   test 'should get new proposal' do
     log_in_as(@user)
     get new_proposal_url
@@ -81,13 +86,13 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
 
   test 'only proposal author can patch proposal' do
     log_in_as(@user)
-    patch proposal_path(proposals(:two)), params: {proposal: {title: 't' * 5, description: 'd' * 200}}
+    patch proposal_path(proposals(:two)), params: { proposal: { title: 't' * 5, description: 'd' * 200 } }
     assert_redirected_to proposals_path
   end
 
   test 'only proposal author can put proposal' do
     log_in_as(@user)
-    put proposal_path(proposals(:two)), params: {proposal: {title: 't' * 5, description: 'd' * 200}}
+    put proposal_path(proposals(:two)), params: { proposal: { title: 't' * 5, description: 'd' * 200 } }
     assert_redirected_to proposals_path
   end
 

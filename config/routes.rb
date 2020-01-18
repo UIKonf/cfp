@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :selections, only: %i[index create destroy]
   end
 
+  get '/proposals/feed', to: 'proposals#feed'
+
   resources :proposals do
     resources :comments, only: %i[index create destroy]
 

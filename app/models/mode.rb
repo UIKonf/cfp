@@ -23,24 +23,24 @@ class Mode
     inactive: [],
     cfp:
       mode_for(user: %i[log_in show],
-               proposal: %i[index show new create update edit publish withdraw destroy],
+               proposal: %i[index feed show new create update edit publish withdraw destroy],
                comment: %i[index create destroy]),
     review:
       mode_for(user: %i[log_in show],
-               proposal: %i[index show update edit withdraw destroy],
+               proposal: %i[index feed show update edit withdraw destroy],
                comment: %i[index create destroy]),
     hold:
       mode_for(user: %i[log_in show],
-               proposal: %i[index show withdraw destroy],
+               proposal: %i[index feed show withdraw destroy],
                comment: %i[destroy]),
     selection:
       mode_for(user: %i[log_in show],
-               proposal: %i[show withdraw destroy],
+               proposal: %i[feed show withdraw destroy],
                comment: %i[destroy],
                selection: %i[index create destroy]),
     archive:
       mode_for(user: %i[log_in show],
-               proposal: %i[show withdraw destroy],
+               proposal: %i[feed show withdraw destroy],
                comment: %i[destroy],
                selection: %i[index])
   }.freeze
