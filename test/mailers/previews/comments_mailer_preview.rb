@@ -3,4 +3,8 @@ class CommentsMailerPreview < ActionMailer::Preview
   def new_comment_email
     CommentsMailer.with(proposal: Proposal.first, comment: Comment.first).new_comment_email
   end
+
+  def new_comment_audit_email
+    CommentsMailer.with(proposal: Proposal.first, comment: Comment.first).new_comment_audit_email
+  end
 end

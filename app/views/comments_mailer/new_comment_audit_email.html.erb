@@ -1,0 +1,9 @@
+<p>
+  Hi UIKonf organizer!
+</p>
+<p>
+  <strong><%= @comment.user.public_name %></strong> just commented on <a href="<%= proposal_url(@proposal) %>"><em><%= @proposal.title %></em></a>:
+</p>
+<blockquote>
+  <%= @comment.body %>
+</blockquote>
