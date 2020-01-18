@@ -7,6 +7,13 @@
 
 <div class="list-group">
   <% @proposals.each do |proposal| %>
-    <%= link_to proposal.title, proposal_path(proposal), class: 'list-group-item list-group-item-action' %>
+    <a href="<%= proposal_path(proposal) %>" class="d-flex align-items-center list-group-item list-group-item-action">
+      <div>
+        <%= proposal.title %>
+      </div>
+      <small class="ml-auto">
+        <%= time_ago_in_words(proposal.updated_at) %> ago
+      </small>
+    </a>
   <% end %>
 </div>
