@@ -32,10 +32,13 @@
           <% if @proposal.user == current_user %>
           <% end %>
         </h1>
+      </div>
+
+      <p>
         <small class="ml-auto">
           Last updated: <%= time_ago_in_words(@proposal.updated_at) %> ago
         </small>
-      </div>
+      </p>
 
       <%= markdown(@proposal.description) %>
     </div>
