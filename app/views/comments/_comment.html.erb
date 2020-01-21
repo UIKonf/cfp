@@ -21,7 +21,7 @@
     <% end %>
   </div>
   <p>
-    <%= comment.body %>
+    <%= markdown comment.body %>
   </p>
 <% else %>
   <div class="d-flex align-items-center my-2">
@@ -43,6 +43,6 @@
     <% end %>
   </div>
   <p>
-    <%= comment.body %>
+    <%= markdown comment.body %>
   </p>
 <% end %>
