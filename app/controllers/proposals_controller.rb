@@ -3,7 +3,7 @@
 class ProposalsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show feed]
   before_action :check_mode
-  before_action :allow_one_active_proposal, only: %i[new create publish]
+  before_action :allow_one_active_proposal, only: %i[publish]
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
 
   def index

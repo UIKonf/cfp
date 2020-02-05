@@ -24,11 +24,11 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should not be able to create a proposal if another is active' do
+  test 'should be able to create a proposal if another is active' do
     log_in_as(@user)
     @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
     get new_proposal_url
-    assert_redirected_to proposals_url
+    assert_response :success
   end
 
   test 'should be able to create a proposal if others are not active' do
