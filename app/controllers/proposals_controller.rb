@@ -3,7 +3,7 @@
 class ProposalsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show feed]
   before_action :check_mode
-  before_action :allow_one_active_proposal, only: %i[publish]
+  before_action :enforce_proposal_limit, only: %i[new create publish]
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
 
   def index
@@ -80,10 +80,10 @@ class ProposalsController < ApplicationController
     params.require(:proposal).permit(:title, :description)
   end
 
-  def allow_one_active_proposal
-    return unless current_user.proposals.where(state: 'published').count.positive?
+  def enforce_proposal_limit
+    return if current_user.proposals.where(state: 'published').count < 3
 
-    flash[:warning] = "You already proposed a talk. Please withdraw it first if you'd like to propose another one."
+    flash[:warning] = "You already proposed three talks. Please withdraw one first before proposing another one."
     redirect_to proposals_url
   end
 

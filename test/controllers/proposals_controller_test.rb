@@ -24,11 +24,13 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should be able to create a proposal if another is active' do
+  test 'should not be able to create a proposal if 3 others are active' do
     log_in_as(@user)
     @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
+    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
     get new_proposal_url
-    assert_response :success
+    assert_redirected_to proposals_url
   end
 
   test 'should be able to create a proposal if others are not active' do
@@ -50,14 +52,16 @@ class ProposalsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to @proposal
   end
 
-  test 'only one proposal can be published' do
+  test 'three proposals can be published' do
     log_in_as(@user)
-    @user.proposals.create!(title: 't' * 5, description: 'b' * 250, state: 'published')
-    proposal = @user.proposals.create!(title: 't' * 5, description: 'b' * 250)
+    @user.proposals.create(title: 't' * 5, description: 'b' * 250, state: 'published')
+    @user.proposals.create(title: 't' * 5, description: 'b' * 250, state: 'published')
+    proposal = @user.proposals.create(title: 't' * 5, description: 'b' * 250)
     post publish_proposal_path(proposal)
 
-    assert_redirected_to proposals_path
-    assert_not proposal.published?
+    assert_redirected_to proposal
+    proposal.reload
+    assert proposal.published?
   end
 
   test 'should delete' do
