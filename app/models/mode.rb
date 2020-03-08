@@ -33,6 +33,10 @@ class Mode
       mode_for(user: %i[log_in show],
                proposal: %i[index feed show update edit withdraw destroy],
                comment: %i[destroy]),
+    refine:
+      mode_for(user: %i[log_in show],
+               proposal: %i[index feed show update edit withdraw destroy],
+               comment: %i[destroy]),
     selection:
       mode_for(user: %i[log_in show],
                proposal: %i[feed show withdraw destroy],

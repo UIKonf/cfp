@@ -7,7 +7,7 @@ class ProposalsController < ApplicationController
   before_action :load_proposal_for_editing, only: %i[edit update destroy publish withdraw]
 
   def index
-    @proposals = if Cfp.mode.mode == :selection
+    @proposals = if %i{selection refine archive}.include?(Cfp.mode.mode)
       Proposal.preselected.shuffle
     else
       Proposal.published_or_preselected.shuffle
