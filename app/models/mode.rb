@@ -31,7 +31,7 @@ class Mode
                comment: %i[index create destroy]),
     hold:
       mode_for(user: %i[log_in show],
-               proposal: %i[index feed show withdraw destroy],
+               proposal: %i[index feed show update edit withdraw destroy],
                comment: %i[destroy]),
     selection:
       mode_for(user: %i[log_in show],
