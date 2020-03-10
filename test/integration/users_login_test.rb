@@ -16,9 +16,9 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to '/auth/github/callback'
     follow_redirect!
     assert is_logged_in?
-    assert_redirected_to proposals_path
+    assert_redirected_to root_path
     follow_redirect!
-    assert_template 'proposals/index'
+    assert_template 'welcome/index'
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", logout_path
     assert_select "a[href=?]", user_path(@user)
@@ -53,13 +53,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-  test 'friendly forwarding' do
-    get proposals_path
-    log_in_as(@user)
-    assert_redirected_to proposals_path
-    assert_nil session[:forwarding_url]
-  end
-
   test 'cannot log in if blocked' do
     OmniAuth.config.add_mock(:github, uid: @user.github_uid)
     @user.block!('bad actor')
@@ -84,7 +77,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to '/auth/github/callback'
     follow_redirect!
     assert is_logged_in?
-    assert_redirected_to proposals_path
+    assert_redirected_to root_path
     follow_redirect!
 
     @user.block!('bad actor')

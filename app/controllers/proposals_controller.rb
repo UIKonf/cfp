@@ -20,7 +20,6 @@ class ProposalsController < ApplicationController
   end
 
   def show
-    store_location unless logged_in? # Store location in case a user logs in
     @proposal = Proposal.find(params[:id])
     if @proposal.deleted? || @proposal.draft? && !current_user?(@proposal.user)
       raise ActiveRecord::RecordNotFound

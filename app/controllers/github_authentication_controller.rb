@@ -13,7 +13,7 @@ class GithubAuthenticationController < ApplicationController
     elsif @user
       log_in(@user)
       flash[:success] = 'Logged in successfully'
-      redirect_back_or proposals_path
+      redirect_to root_url
     else
       flash[:danger] = 'Ooops, something went wrong logging you in :/'
       redirect_to login_url
