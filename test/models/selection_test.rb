@@ -15,7 +15,7 @@ class SelectionTest < ActiveSupport::TestCase
 
   test 'a user can have a maximum of 8 selections' do
     user = users(:sabine)
-    9.times do
+    8.times do
       proposal = user.proposals.create!(title: 't' * 5, description: 'd' * 200)
       user.selections.create!(proposal: proposal)
     end
