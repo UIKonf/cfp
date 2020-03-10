@@ -27,19 +27,25 @@
       <p>
         Now's the time to select the proposals you'd like to see at UIKonf.
       </p>
-      <%= link_to 'Selections', user_selections_path, class: 'btn btn-lg btn-primary' %>
+      <% if logged_in? %>
+        <%= link_to 'Selections', user_selections_path(current_user), class: 'btn btn-lg btn-primary' %>
+      <% end %>
     <% elsif mode?(:archive) %>
       <p>
         The talks have been selected. See you at UIKonf!
       </p>
-      <%= link_to 'Selections', user_selections_path, class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Selections', user_selections_path(current_user), class: 'btn btn-lg btn-primary' %>
     <% end %>
   <% else %>
     <% if can?(:index, :proposal) %>
       <%= link_to 'Proposals', proposals_path, class: 'btn btn-lg btn-primary' %>
-    <% else %>
+    <% elsif mode?(:inactive) %>
       <p>
         There's not much happening at this stage, come back soon!
+      </p>
+    <% elsif can?(:log_in, :user) %>
+      <p>
+      <%= link_to 'Log In', login_path, class: 'btn btn-lg btn-primary' %>
       </p>
     <% end %>
   <% end %>
