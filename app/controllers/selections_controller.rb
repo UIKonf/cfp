@@ -19,6 +19,12 @@ class SelectionsController < ApplicationController
       return
     end
 
+    if Selection.where(user_id: current_user.id).count >= Selection::LIMIT
+      flash[:error] = "You already selected the maximum number of proposals"
+      redirect_to user_selections_url(current_user)
+      return
+    end
+
     selection = current_user.selections.create(proposal: proposal)
     if selection.save
       redirect_to user_selections_url

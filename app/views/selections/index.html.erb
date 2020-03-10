@@ -26,9 +26,9 @@
 
 <section class="mt-4">
   <p>
-    Here are the proposals you can select:
+    Here are the proposals you can select: (<%= remaining_selection_count %> remaining)
   </p>
   <ul class="list-group">
-    <%= render partial: 'selections/proposal', collection: @proposals %>
+    <%= render partial: 'selections/proposal', collection: @proposals, locals: {maximum_reached: maximum_reached} %>
   </ul>
 </section>
