@@ -12,15 +12,4 @@ class SelectionTest < ActiveSupport::TestCase
   test 'should be valid' do
     assert @selection.valid?
   end
-
-  test 'a user can have a maximum of 8 selections' do
-    user = users(:sabine)
-    8.times do
-      proposal = user.proposals.create!(title: 't' * 5, description: 'd' * 200)
-      user.selections.create!(proposal: proposal)
-    end
-
-    selection = user.selections.build(proposal: proposals(:one))
-    assert_not selection.valid?
-  end
 end

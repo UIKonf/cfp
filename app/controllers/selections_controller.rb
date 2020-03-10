@@ -2,6 +2,8 @@ class SelectionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_mode
 
+  LIMIT = 8
+
   def index
     @selections = current_user.selections
     if @selections.count > 0
@@ -19,7 +21,7 @@ class SelectionsController < ApplicationController
       return
     end
 
-    if Selection.where(user_id: current_user.id).count >= Selection::LIMIT
+    if Selection.where(user_id: current_user.id).count >= LIMIT
       flash[:error] = "You already selected the maximum number of proposals"
       redirect_to user_selections_url(current_user)
       return
@@ -27,7 +29,7 @@ class SelectionsController < ApplicationController
 
     selection = current_user.selections.create(proposal: proposal)
     if selection.save
-      redirect_to user_selections_url
+      redirect_to user_selections_url(current_user)
     else
       flash[:error] = selection.errors.full_message.to_sentence
     end
