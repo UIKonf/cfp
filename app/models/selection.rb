@@ -9,7 +9,7 @@ class Selection < ApplicationRecord
   private
 
   def maximum_number_of_selections
-    if Selection.where(user_id: user.id).count >= LIMIT
+    if Selection.where(user_id: user.id).count > LIMIT
       errors[:base] << "You can only select #{LIMIT} proposals at a time"
     end
   end
