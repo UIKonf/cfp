@@ -83,7 +83,7 @@ GEM
     crass (1.0.6)
     erubi (1.11.0)
     execjs (2.8.1)
-    faker (2.23.0)
+    faker (3.0.0)
       i18n (>= 1.8.11, < 2)
     faraday (2.6.0)
       faraday-net_http (>= 2.0, < 3.1)
@@ -260,7 +260,7 @@ DEPENDENCIES
   bootstrap (~> 5.2.2)
   byebug
   capybara (>= 2.15)
-  faker (~> 2.23.0)
+  faker (~> 3.0.0)
   jbuilder (~> 2.11)
   listen (>= 3.0.5, < 3.8)
   omniauth (~> 2.1.0)
