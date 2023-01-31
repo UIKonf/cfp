@@ -34,7 +34,7 @@ gem 'omniauth', '~> 2.1.1'
 gem 'omniauth-github', '~> 2.0.1'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
-gem "redcarpet", "~> 3.5"
+gem "redcarpet", "~> 3.6"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
