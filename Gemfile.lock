@@ -138,7 +138,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    pg (1.4.5)
+    pg (1.5.3)
     popper_js (2.11.6)
     public_suffix (5.0.0)
     puma (6.1.0)
